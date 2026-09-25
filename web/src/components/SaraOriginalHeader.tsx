@@ -64,12 +64,12 @@ export default function SaraOriginalHeader() {
         style={{
           backgroundImage: "url('/world-map-dots.svg')",
           backgroundPosition: "center",
-          backgroundSize: "contain",
+          backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat"
         }}
       >
-        {/* Subtle 15% tint overlay for maximum dot contrast while retaining high text legibility */}
-        <div className="absolute inset-0 bg-white/20 pointer-events-none" aria-hidden="true" />
+        {/* Transparent overlay */}
+        <div className="absolute inset-0 bg-white/10 pointer-events-none" aria-hidden="true" />
 
         <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 relative z-10">
           
