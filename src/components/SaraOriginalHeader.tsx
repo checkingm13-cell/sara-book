@@ -146,43 +146,43 @@ export default function SaraOriginalHeader() {
               Home
             </Link>
             <Link 
-              href="/#catalog" 
-              className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
-            >
-              About Us
-            </Link>
-            <Link 
-              href="/publish" 
+              href="/author-guidelines" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
               Author Guidelines
             </Link>
             <Link 
-              href="/calculator" 
+              href="/packages" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
-              Packages & Royalties
+              Packages & Pricing
             </Link>
             <Link 
-              href="/#catalog" 
+              href="/bookshelf" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
               Bookshelf
             </Link>
             <Link 
-              href="/publish" 
+              href="/calculator" 
+              className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
+            >
+              Royalty Calculator
+            </Link>
+            <Link 
+              href="/download" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
               Download
             </Link>
             <Link 
-              href="/#disciplines" 
+              href="/faq" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
               FAQ
             </Link>
             <Link 
-              href="/publish" 
+              href="/contact" 
               className="px-3.5 py-3 hover:bg-[#ffae00] hover:text-black transition duration-150 rounded-xs"
             >
               Contact Us
