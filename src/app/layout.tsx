@@ -64,6 +64,9 @@ export const metadata: Metadata = {
   },
 };
 
+import SaraOriginalHeader from "@/components/SaraOriginalHeader";
+import SaraFooter from "@/components/SaraFooter";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -74,8 +77,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden selection:bg-amber-100 selection:text-amber-900">
-        {children}
+      <body className="min-h-full flex flex-col overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 bg-[#FAF9F6]">
+        <SaraOriginalHeader />
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+        <SaraFooter />
       </body>
     </html>
   );

@@ -40,9 +40,6 @@ export default function SwissHomepage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Authentic Original Sara Publication Header System */}
-      <SaraOriginalHeader />
-
       {/* Light Hero Section */}
       <section className="relative border-b border-slate-200 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
@@ -256,59 +253,6 @@ export default function SwissHomepage() {
           </div>
         </div>
       </section>
-
-      {/* Light Clean Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-12">
-          
-          <div className="md:col-span-6 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-slate-950 font-bold text-xs">
-                SBP
-              </div>
-              <span className="text-lg font-bold tracking-tight text-white">
-                SARA BOOK PUBLICATION
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 max-w-md leading-relaxed">
-              Operating since 2011 from Ahmedabad, Gujarat. Dedicated to academic rigor, UGC-compliant ISBN issuance, and elevating regional and national research scholarship into permanent book literature.
-            </p>
-            <div className="font-mono text-xs text-slate-500 pt-2">
-              REGISTERED OFFICE: 303, MAHARANA PRATAP COMPLEX, OPP. KAPADIA GUEST HOUSE, B/H V.S. HOSPITAL, PALDI, AHMEDABAD - 380006, GUJARAT, INDIA.
-            </div>
-          </div>
-
-          <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase block">
-              FACULTY SERVICES
-            </span>
-            <ul className="space-y-2 text-xs font-mono uppercase text-slate-400">
-              <li><Link href="/publish" className="hover:text-white transition">Manuscript Submission</Link></li>
-              <li><Link href="/publish" className="hover:text-white transition">Author Guidelines</Link></li>
-              <li><Link href="/calculator" className="hover:text-white transition">Royalty Calculator</Link></li>
-              <li><Link href="#catalog" className="hover:text-white transition">Subject Catalog</Link></li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase block">
-              EDITORIAL DESK
-            </span>
-            <div className="space-y-2 text-xs font-mono text-slate-400">
-              <p>PHONE: +91-8866003636</p>
-              <p>PHONE: +91-8866113636</p>
-              <p>EMAIL: editor@sarapublication.com</p>
-              <p>HOURS: MON-SAT 10:00 - 18:30 IST</p>
-            </div>
-          </div>
-
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-12 mt-12 border-t border-slate-800 flex flex-col sm:flex-row justify-between text-[11px] font-mono text-slate-500">
-          <span>&copy; {new Date().getFullYear()} SARA BOOK PUBLICATION. ALL RIGHTS RESERVED.</span>
-          <span className="text-amber-400/80 mt-2 sm:mt-0 font-medium">LIGHT ARCHITECTURAL EDITION • 0MS LCP ANTIGRAVITY ENGINE</span>
-        </div>
-      </footer>
     </div>
   );
 }
