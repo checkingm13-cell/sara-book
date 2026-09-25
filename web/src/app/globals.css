@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  /* Lightened Modern Swiss Palette */
+  --slate-dark: #1E293B;       /* Softer Charcoal Slate instead of heavy black navy */
+  --slate-body: #334155;       /* Relaxed high-contrast body text */
+  --gold-warm: #D97706;        /* Refined Warm Amber Gold */
+  --gold-light: #FEF3C7;       /* Soft Gold Pill Badge */
+  --canvas-bg: #FAF9F6;        /* Lighter, cleaner Alabaster Ivory */
+  --canvas-card: #FFFFFF;      /* Crisp Pure White for cards */
+  --border-subtle: #E2E8F0;    /* Gentle Slate Border */
+  --border-strong: #CBD5E1;    /* Defined Architectural Edge */
+}
+
+body {
+  background-color: var(--canvas-bg);
+  color: var(--slate-dark);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Akzidenz-Grotesk", "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Antigravity 3D Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
