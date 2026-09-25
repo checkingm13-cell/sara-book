@@ -17,6 +17,7 @@ Welcome to the central architectural decision vault for the complete modernizati
 | `07` | [[07 - Executive Technical Audit & Forensic Evidence Report]] | Forensic CLI evidence package, raw HTTP headers, and problem/solution summary for owner review and peer AI validation. |
 | `08` | [[08 - Legacy Server Compromise, CloudLinux Quarantine, and Safe Modernization Plan]] | Breakdown of why the security guy put the site on CloudLinux and Sucuri, why that emergency fix choked the site, and the safe modernization strategy. |
 | `09` | [[09 - Swiss Typographic & Noma Bar Gestalt Design System]] | Visual engineering specification: 3-color strict palette (#0A192F, #E5A93C, #F7F6EE), asymmetric grid layout, and Noma Bar negative space gestalt iconography. |
+| `10` | [[10 - Competitor Intelligence & Visual UX Benchmark Audit]] | Forensic audit of 6 competitor websites (Mahi, Vista, Notion Press, BlueRose, White Falcon, Zorba, Pothi) across 42 screenshots, mapping high-converting UX patterns. |
 
 ---
 
