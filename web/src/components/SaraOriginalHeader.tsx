@@ -57,10 +57,43 @@ export default function SaraOriginalHeader() {
     <header className="w-full font-sans bg-white select-none">
       {/* ─────────────────────────────────────────────────────────────
           1. TOP IDENTITY BAR (.bottom-bar > .container-fluid)
-          White canvas containing logo, SBP brand, ISBN announcement, and date/time info
+          White canvas with Dot Grid World Map backdrop
          ───────────────────────────────────────────────────────────── */}
-      <div className="w-full px-4 sm:px-8 py-3.5 border-b border-slate-100">
-        <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div className="w-full px-4 sm:px-8 py-3.5 border-b border-slate-100 relative overflow-hidden">
+        {/* Subtle Dot Grid World Map Vector Backdrop */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-25 flex items-center justify-center overflow-hidden" 
+          aria-hidden="true"
+        >
+          <svg 
+            className="w-full max-w-5xl h-full object-cover" 
+            viewBox="0 0 1000 400" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <pattern id="dot-pattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.2" fill="#1658b3" />
+            </pattern>
+            {/* World Continents Rough Dot-Matrix Silhouette Masks */}
+            {/* North America */}
+            <path d="M120,60 Q180,50 250,80 Q280,120 220,180 Q160,200 130,140 Z" fill="url(#dot-pattern)" />
+            {/* South America */}
+            <path d="M220,200 Q260,210 280,260 Q250,340 210,360 Q190,300 210,240 Z" fill="url(#dot-pattern)" />
+            {/* Europe */}
+            <path d="M460,60 Q520,50 550,90 Q530,130 470,120 Z" fill="url(#dot-pattern)" />
+            {/* Africa */}
+            <path d="M470,140 Q550,130 570,190 Q560,280 500,320 Q450,250 460,180 Z" fill="url(#dot-pattern)" />
+            {/* Asia & India Focus */}
+            <path d="M560,60 Q720,40 820,100 Q800,180 720,200 Q650,230 630,220 Q610,160 550,140 Z" fill="url(#dot-pattern)" />
+            {/* India Accent Beacon */}
+            <circle cx="650" cy="180" r="3.5" fill="#ffae00" />
+            <circle cx="650" cy="180" r="8" stroke="#ffae00" strokeWidth="1" strokeDasharray="2 2" className="animate-ping" />
+            {/* Australia */}
+            <path d="M780,250 Q850,240 880,280 Q850,330 790,320 Z" fill="url(#dot-pattern)" />
+          </svg>
+        </div>
+
+        <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 relative z-10">
           
           {/* Section A: Brand & International Emblem */}
           <div className="flex items-center gap-4">
