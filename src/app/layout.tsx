@@ -77,7 +77,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 bg-[#FAF9F6]">
+      <body className="min-h-full flex flex-col overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 bg-white">
         <SaraOriginalHeader />
         <main className="flex-1 w-full">
           {children}

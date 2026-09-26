@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scrapers and temp extraction files
+*.js
+origin.html
+origin_pages/
+sara-landing/
+sara-logo/

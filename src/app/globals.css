@@ -2,29 +2,62 @@
 
 :root {
   /* Lightened Modern Swiss Palette */
-  --slate-dark: #1E293B;       /* Softer Charcoal Slate instead of heavy black navy */
-  --slate-body: #334155;       /* Relaxed high-contrast body text */
-  --gold-warm: #D97706;        /* Refined Warm Amber Gold */
-  --gold-light: #FEF3C7;       /* Soft Gold Pill Badge */
-  --canvas-bg: #FAF9F6;        /* Lighter, cleaner Alabaster Ivory */
-  --canvas-card: #FFFFFF;      /* Crisp Pure White for cards */
-  --border-subtle: #E2E8F0;    /* Gentle Slate Border */
-  --border-strong: #CBD5E1;    /* Defined Architectural Edge */
+  --slate-dark: #1E293B;
+  --slate-body: #334155;
+  --gold-warm: #D97706;
+  --gold-light: #FEF3C7;
+  --canvas-bg: #FFFFFF;
+  --canvas-card: #FFFFFF;
+  --border-subtle: #E2E8F0;
+  --border-strong: #CBD5E1;
 }
 
 body {
-  background-color: var(--canvas-bg);
+  background-color: #FFFFFF;
   color: var(--slate-dark);
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Akzidenz-Grotesk", "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Antigravity 3D Utilities */
-.preserve-3d {
-  transform-style: preserve-3d;
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.perspective-1200 {
-  perspective: 1200px;
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Gentle Pan Animation for Header Background World Map */
+@keyframes mapFloat {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-map-pan {
+  animation: mapFloat 45s ease-in-out infinite;
+}
+
+/* Subtle Shimmer for Academic Badges */
+@keyframes badgeShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shimmer {
+  animation: badgeShimmer 4s infinite;
 }
