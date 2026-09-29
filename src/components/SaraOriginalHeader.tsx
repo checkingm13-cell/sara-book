@@ -19,7 +19,13 @@ import {
   HelpCircle,
   PhoneCall,
   ExternalLink,
-  MessageCircle
+  MessageCircle,
+  Sparkles,
+  Stethoscope,
+  Cpu,
+  BookMarked,
+  Send,
+  CheckCircle2
 } from "lucide-react";
 
 export default function SaraOriginalHeader() {
@@ -372,7 +378,7 @@ export default function SaraOriginalHeader() {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. MOBILE SLIDE-OVER DRAWER (Luxury Responsive Design)
+          3. MOBILE SLIDE-OVER DRAWER (Notion Press / Amazon KDP Clean Left Drawer)
          ───────────────────────────────────────────────────────────── */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -382,71 +388,227 @@ export default function SaraOriginalHeader() {
             onClick={() => setDrawerOpen(false)}
           />
 
-          {/* Drawer Slide Panel */}
-          <div className="fixed inset-y-0 right-0 w-[85vw] max-w-[340px] bg-white shadow-2xl z-50 flex flex-col justify-between animate-in slide-in-from-right duration-300">
+          {/* Left Slide Panel */}
+          <div className="fixed inset-y-0 left-0 w-[85vw] max-w-[320px] bg-white shadow-2xl z-50 flex flex-col justify-between animate-in slide-in-from-left duration-300">
             
-            {/* Top: Drawer Brand Header */}
-            <div>
-              <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg overflow-hidden bg-white p-1 border border-slate-200 shadow-2xs">
-                    <Image 
-                      src="/branding/sara-logo.png" 
-                      alt="Sara Book Publication" 
-                      width={36} 
-                      height={36} 
-                      className="object-contain w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <span className="font-black text-slate-900 text-sm tracking-tight uppercase block leading-none">
-                      Sara Publication
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block mt-1">
-                      Academic Press • Est. 2011
-                    </span>
-                  </div>
-                </div>
-                
-                <button 
-                  onClick={() => setDrawerOpen(false)}
-                  className="p-2 rounded-xl text-slate-500 hover:bg-slate-200/60 hover:text-slate-900 transition cursor-pointer"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Mobile Search Input */}
-              <div className="p-4 border-b border-slate-100 bg-white">
-                <form onSubmit={handleSearch} className="relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Search by title, author, or ISBN..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-10 pl-3.5 pr-10 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#1658b3] focus:bg-white transition"
+            {/* Top Brand Card (Dark Navy #0A1628) */}
+            <div className="bg-[#0A1628] text-white p-5 border-b border-white/10 flex items-center justify-between">
+              <Link 
+                href="/" 
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-xl overflow-hidden bg-white p-1 shadow-md shrink-0">
+                  <Image 
+                    src="/branding/sara-logo.png" 
+                    alt="Sara Book Publication" 
+                    width={40} 
+                    height={40} 
+                    className="object-contain w-full h-full"
                   />
-                  <button
-                    type="submit"
-                    className="absolute right-1 top-1 bottom-1 px-3 bg-[#1658b3] text-white rounded-lg flex items-center justify-center transition hover:bg-blue-700 cursor-pointer"
-                    aria-label="Search"
+                </div>
+                <div>
+                  <span className="font-black text-sm tracking-tight uppercase block leading-none text-white">
+                    SARA PUBLICATION
+                  </span>
+                  <span className="text-[10px] font-mono text-[#FFAE00] uppercase tracking-wider block mt-1 font-semibold">
+                    EST. 2011 • ACADEMIC PRESS
+                  </span>
+                </div>
+              </Link>
+              
+              <button 
+                onClick={() => setDrawerOpen(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Scrollable Navigation Body */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-5 text-xs">
+              
+              {/* Section 1: Catalog & Discover */}
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-2 px-2">
+                  EXPLORE & CATALOG
+                </span>
+                <div className="space-y-0.5">
+                  <Link
+                    href="/bookshelf"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/bookshelf"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
                   >
-                    <Search className="w-3.5 h-3.5" />
-                  </button>
-                </form>
+                    <BookOpen className="w-4 h-4 text-[#1658b3] shrink-0" />
+                    <span>Browse All Titles (100+)</span>
+                  </Link>
+
+                  <Link
+                    href="/bookshelf?q=Medical"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition font-medium"
+                  >
+                    <Stethoscope className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Medical & Healthcare</span>
+                  </Link>
+
+                  <Link
+                    href="/bookshelf?q=Engineering"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition font-medium"
+                  >
+                    <Cpu className="w-4 h-4 text-sky-600 shrink-0" />
+                    <span>Engineering & Tech</span>
+                  </Link>
+
+                  <Link
+                    href="/bookshelf?q=Literature"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition font-medium"
+                  >
+                    <BookMarked className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span>Literature & Humanities</span>
+                  </Link>
+                </div>
               </div>
 
-              {/* Currency Selector Pill on Mobile */}
-              <div className="px-4 py-2.5 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between">
-                <span className="text-[11px] font-mono uppercase font-bold text-slate-500">
-                  Currency Mode:
+              {/* Section 2: Author Publishing */}
+              <div className="pt-2 border-t border-slate-100">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-2 px-2">
+                  AUTHOR PUBLISHING
                 </span>
-                <div className="flex items-center gap-1 bg-white p-0.5 rounded-lg border border-slate-200">
+                <div className="space-y-0.5">
+                  <Link
+                    href="/packages"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center justify-between px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/packages"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Package className="w-4 h-4 text-[#1658b3] shrink-0" />
+                      <span>Packages & Pricing</span>
+                    </div>
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono uppercase font-black bg-[#FFAE00] text-[#0A1628]">
+                      UGC
+                    </span>
+                  </Link>
+
+                  <Link
+                    href="/publish"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center justify-between px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/publish"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Send className="w-4 h-4 text-rose-500 shrink-0" />
+                      <span>Submit Proposal</span>
+                    </div>
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono uppercase font-black bg-rose-100 text-rose-700">
+                      Fast
+                    </span>
+                  </Link>
+
+                  <Link
+                    href="/author-guidelines"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/author-guidelines"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <FileText className="w-4 h-4 text-slate-500 shrink-0" />
+                    <span>Author Guidelines (CAS)</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Section 3: Tools & Resources */}
+              <div className="pt-2 border-t border-slate-100">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-2 px-2">
+                  TOOLS & CALCULATORS
+                </span>
+                <div className="space-y-0.5">
+                  <Link
+                    href="/calculator"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/calculator"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <Calculator className="w-4 h-4 text-[#1658b3] shrink-0" />
+                    <span>Royalty & Print Calculator</span>
+                  </Link>
+
+                  <Link
+                    href="/download"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/download"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <Download className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Manuscript Word Downloads</span>
+                  </Link>
+
+                  <Link
+                    href="/faq"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/faq"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <HelpCircle className="w-4 h-4 text-slate-500 shrink-0" />
+                    <span>Frequently Asked Questions</span>
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    onClick={() => setDrawerOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition ${
+                      pathname === "/contact"
+                        ? "bg-[#1658b3] text-white"
+                        : "text-slate-800 hover:bg-slate-100"
+                    }`}
+                  >
+                    <PhoneCall className="w-4 h-4 text-slate-500 shrink-0" />
+                    <span>Contact Editorial Office</span>
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom: Currency Selector & Action Strip */}
+            <div className="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
+              
+              {/* Currency Toggle */}
+              <div className="flex items-center justify-between bg-white p-1 rounded-xl border border-slate-200 shadow-2xs">
+                <span className="text-[10px] font-mono uppercase font-bold text-slate-500 pl-2">
+                  Currency:
+                </span>
+                <div className="flex items-center gap-1">
                   <button
                     type="button"
                     onClick={() => setCurrency("INR")}
-                    className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition ${
+                    className={`px-3 py-1 text-xs font-bold rounded-lg transition cursor-pointer ${
                       currency === "INR" ? "bg-[#0A1628] text-white shadow-xs" : "text-slate-600"
                     }`}
                   >
@@ -455,7 +617,7 @@ export default function SaraOriginalHeader() {
                   <button
                     type="button"
                     onClick={() => setCurrency("USD")}
-                    className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition ${
+                    className={`px-3 py-1 text-xs font-bold rounded-lg transition cursor-pointer ${
                       currency === "USD" ? "bg-[#0A1628] text-white shadow-xs" : "text-slate-600"
                     }`}
                   >
@@ -463,152 +625,18 @@ export default function SaraOriginalHeader() {
                   </button>
                 </div>
               </div>
-            </div>
 
-            {/* Middle: Scrollable Navigation List */}
-            <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1.5">
-              
-              {/* Accordion 1: Discover Books */}
-              <div className="rounded-xl border border-slate-100 bg-white overflow-hidden shadow-2xs">
-                <button
-                  type="button"
-                  onClick={() => setMobileDiscoverOpen(!mobileDiscoverOpen)}
-                  className="flex items-center justify-between w-full px-3.5 py-3 text-slate-800 hover:bg-slate-50 transition text-xs font-bold uppercase tracking-wide cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <BookOpen className="w-4 h-4 text-[#1658b3]" />
-                    <span>Discover Books</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileDiscoverOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {mobileDiscoverOpen && (
-                  <div className="px-3.5 pb-3 pt-1 space-y-2 bg-slate-50/60 border-t border-slate-100">
-                    <Link
-                      href="/bookshelf"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center justify-between py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
-                    >
-                      <span>Browse All Titles (100+)</span>
-                      <span>→</span>
-                    </Link>
-                    <Link
-                      href="/bookshelf?q=Medical"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Medical & Healthcare
-                    </Link>
-                    <Link
-                      href="/bookshelf?q=Engineering"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Engineering & Tech
-                    </Link>
-                    <Link
-                      href="/bookshelf?q=Literature"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Literature & Humanities
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Accordion 2: For Writers */}
-              <div className="rounded-xl border border-slate-100 bg-white overflow-hidden shadow-2xs">
-                <button
-                  type="button"
-                  onClick={() => setMobileWritersOpen(!mobileWritersOpen)}
-                  className="flex items-center justify-between w-full px-3.5 py-3 text-slate-800 hover:bg-slate-50 transition text-xs font-bold uppercase tracking-wide cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Package className="w-4 h-4 text-[#1658b3]" />
-                    <span>For Writers</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileWritersOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {mobileWritersOpen && (
-                  <div className="px-3.5 pb-3 pt-1 space-y-2 bg-slate-50/60 border-t border-slate-100">
-                    <Link
-                      href="/packages"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center justify-between py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
-                    >
-                      <span>Publishing Packages & Pricing</span>
-                      <span>→</span>
-                    </Link>
-                    <Link
-                      href="/author-guidelines"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Author Guidelines (UGC CAS)
-                    </Link>
-                    <Link
-                      href="/calculator"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Royalty & Print Calculator
-                    </Link>
-                    <Link
-                      href="/download"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
-                    >
-                      • Manuscript Word Downloads
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Direct Standard Links */}
-              <div className="pt-2 space-y-1">
-                <Link
-                  href="/calculator"
-                  onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
-                >
-                  <Calculator className="w-4 h-4 text-slate-400" />
-                  <span>Royalty Calculator</span>
-                </Link>
-
-                <Link
-                  href="/faq"
-                  onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
-                >
-                  <HelpCircle className="w-4 h-4 text-slate-400" />
-                  <span>Frequently Asked Questions</span>
-                </Link>
-
-                <Link
-                  href="/contact"
-                  onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
-                >
-                  <PhoneCall className="w-4 h-4 text-slate-400" />
-                  <span>Contact Editorial Office</span>
-                </Link>
-              </div>
-
-            </div>
-
-            {/* Bottom: Action CTA & Fast Support */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50/90 space-y-2.5">
+              {/* Main Red CTA Button */}
               <Link
-                href="/publish"
+                href="/packages"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center justify-center w-full py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-sm"
+                className="flex items-center justify-center w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-sm"
               >
-                Submit Manuscript Proposal
+                Get Published Today
               </Link>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              {/* Contact Icons */}
+              <div className="grid grid-cols-2 gap-2 pt-0.5">
                 <a 
                   href="https://wa.me/918866003636?text=Hello%20Sara%20Book%20Publication"
                   target="_blank"
@@ -624,9 +652,10 @@ export default function SaraOriginalHeader() {
                   className="flex items-center justify-center gap-1.5 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-[11px] font-bold hover:bg-slate-100 transition shadow-2xs"
                 >
                   <Phone className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Call Us</span>
+                  <span>+91-8866003636</span>
                 </a>
               </div>
+
             </div>
 
           </div>
