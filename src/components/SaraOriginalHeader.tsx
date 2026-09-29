@@ -109,26 +109,19 @@ export default function SaraOriginalHeader() {
     }
   };
 
-  const isTransparent = isHomePage;
+  const isTransparent = false;
 
   return (
     <>
       <header 
-        className={`w-full font-sans select-none transition-all duration-300 ease-in-out ${
-          isHomePage ? "fixed top-0 left-0 right-0 z-50" : "sticky top-0 z-50"
-        } ${
+        className={`w-full font-sans select-none transition-all duration-300 ease-in-out sticky top-0 z-50 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
-        } ${
-          isTransparent
-            ? "bg-transparent text-white border-b border-transparent"
-            : "bg-white text-slate-800 shadow-sm border-b border-slate-200"
-        }`}
+        } bg-white text-slate-800 shadow-xs border-b border-slate-200`}
       >
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP UTILITY STRIP (Hidden on homepage transparent mode so hero shows from pixel 0)
+          1. TOP UTILITY STRIP (Clean academic top bar)
          ───────────────────────────────────────────────────────────── */}
-      {!isTransparent && (
-        <div className="w-full py-1.5 px-4 sm:px-8 hidden md:block text-[11px] transition-colors border-b bg-[#f8fafc] border-slate-100 text-slate-500">
+      <div className="w-full py-1.5 px-4 sm:px-8 hidden md:block text-[11px] transition-colors border-b bg-[#f8fafc] border-slate-100 text-slate-500">
           <div className="max-w-[1440px] mx-auto flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Phone className="w-3 h-3 text-slate-400" />
@@ -153,7 +146,6 @@ export default function SaraOriginalHeader() {
             </div>
           </div>
         </div>
-      )}
 
       {/* ─────────────────────────────────────────────────────────────
           2. MAIN COMPACT HEADER ROW (Brand | Nav Menus | Search | CTA)
