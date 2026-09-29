@@ -19,7 +19,19 @@ export default function BookCover({
   category,
   className = "",
 }: BookCoverProps) {
-  const [hasError, setHasError] = useState(!src);
+  // If remote URL is given (https://sarapublication.com/admin/img/books_img/xxx.jpg), 
+  // also check local /img/books_img/xxx.jpg
+  const getCleanSrc = (url?: string) => {
+    if (!url) return "";
+    if (url.includes("/books_img/")) {
+      const filename = url.split("/books_img/").pop();
+      return `/img/books_img/${filename}`;
+    }
+    return url;
+  };
+
+  const imageSrc = getCleanSrc(src);
+  const [hasError, setHasError] = useState(!imageSrc);
 
   if (hasError || !src) {
     return (
@@ -63,7 +75,7 @@ export default function BookCover({
       className={`relative aspect-[1/1.5] w-full rounded-sm overflow-hidden shadow-xs group-hover:shadow-lg transition-all duration-200 border border-slate-200/80 bg-slate-100 flex items-center justify-center ${className}`}
     >
       <img
-        src={src}
+        src={imageSrc}
         alt={title}
         loading="lazy"
         className="object-cover w-full h-full"

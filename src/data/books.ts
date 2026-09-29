@@ -31,7 +31,21 @@ export const CATEGORIES = [
   { id: "SOCIAL_SCIENCE_AND_HUMANITIES", label: "Social Science & Humanities", count: 35, icon: "GraduationCap" }
 ] as const;
 
-export const ALL_BOOKS: Book[] = booksData as Book[];
+// Helper to convert remote URLs to local static assets
+function resolveLocalPath(url: string | undefined, folder: "books_img" | "author_img"): string {
+  if (!url) return "";
+  if (url.includes(`/${folder}/`)) {
+    const filename = url.split(`/${folder}/`).pop();
+    return `/img/${folder}/${filename}`;
+  }
+  return url;
+}
+
+export const ALL_BOOKS: Book[] = (booksData as Book[]).map((book) => ({
+  ...book,
+  coverImage: resolveLocalPath(book.coverImage, "books_img") || "/books/default-cover.svg",
+  authorImage: resolveLocalPath(book.authorImage, "author_img"),
+}));
 
 export const FEATURED_BOOKS: Book[] = ALL_BOOKS.slice(0, 12);
 
