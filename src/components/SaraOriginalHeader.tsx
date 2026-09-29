@@ -112,17 +112,18 @@ export default function SaraOriginalHeader() {
   const isTransparent = isHomePage;
 
   return (
-    <header 
-      className={`w-full font-sans select-none transition-all duration-300 ease-in-out ${
-        isHomePage ? "fixed top-0 left-0 right-0 z-50" : "sticky top-0 z-50"
-      } ${
-        showHeader ? "translate-y-0" : "-translate-y-full"
-      } ${
-        isTransparent
-          ? "bg-transparent text-white border-b border-transparent"
-          : "bg-white text-slate-800 shadow-sm border-b border-slate-200"
-      }`}
-    >
+    <>
+      <header 
+        className={`w-full font-sans select-none transition-all duration-300 ease-in-out ${
+          isHomePage ? "fixed top-0 left-0 right-0 z-50" : "sticky top-0 z-50"
+        } ${
+          showHeader ? "translate-y-0" : "-translate-y-full"
+        } ${
+          isTransparent
+            ? "bg-transparent text-white border-b border-transparent"
+            : "bg-white text-slate-800 shadow-sm border-b border-slate-200"
+        }`}
+      >
       {/* ─────────────────────────────────────────────────────────────
           1. TOP UTILITY STRIP (Hidden on homepage transparent mode so hero shows from pixel 0)
          ───────────────────────────────────────────────────────────── */}
@@ -376,12 +377,13 @@ export default function SaraOriginalHeader() {
         </div>
 
       </div>
+    </header>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. MOBILE SLIDE-OVER DRAWER (Notion Press / Amazon KDP Clean Left Drawer)
+          3. MOBILE SLIDE-OVER DRAWER (Rendered OUTSIDE <header> to escape transform stacking context)
          ───────────────────────────────────────────────────────────── */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+        <div className="fixed inset-0 z-[9999] lg:hidden">
           {/* Backdrop with dark blur */}
           <div 
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-300"
@@ -661,6 +663,6 @@ export default function SaraOriginalHeader() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
