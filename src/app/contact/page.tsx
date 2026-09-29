@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, MapPin, Mail, Phone, Clock, Send, ShieldCheck, Building2 } from "lucide-react";
+import { ArrowLeft, MapPin, Mail, Phone, Clock, Send, ShieldCheck, Building2, MessageSquare } from "lucide-react";
 
 export const metadata = {
   title: "Contact Editorial Office | Sara Book Publication",
@@ -8,44 +8,53 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-white text-slate-800 font-sans">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-500 hover:text-slate-900 transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Home
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
           </Link>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-slate-100 text-slate-900 border border-slate-200 text-xs font-mono uppercase tracking-widest font-semibold mb-3">
-            Publishing House Headquarters
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-3">
-            Contact Editorial Division
-          </h1>
-          <p className="text-slate-600 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Reach out directly to our publishing board in Ahmedabad for author consultations, institutional purchasing, or manuscript progress inquiries.
-          </p>
-        </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Contact Details Card */}
-          <div className="space-y-6">
-            <div className="bg-slate-900 text-white p-8 border border-slate-800 shadow-sm">
-              <h2 className="text-lg font-bold uppercase tracking-wider mb-6 pb-2 border-b border-slate-800 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-[#e31e24]" />
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
+              <Building2 className="w-3 h-3 text-[#FFAE00]" /> Editorial Division Headquarters
+            </div>
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
+              Contact Editorial Division
+            </h1>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Reach out directly to our publishing board in Ahmedabad for author consultations, institutional bulk purchasing, or manuscript progress inquiries.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          2. CONTACT GRID & FORM
+         ───────────────────────────────────────────────────────────── */}
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Left Column: Office Details (4 cols) */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="bg-[#0A1628] text-white p-6 sm:p-7 rounded-xl border border-white/10 shadow-sm">
+              <h2 className="text-sm font-bold uppercase tracking-wider mb-5 pb-3 border-b border-white/10 flex items-center gap-2 font-mono text-[#FFAE00]">
+                <Building2 className="w-4 h-4 text-[#FFAE00]" />
                 Headquarters
               </h2>
 
-              <div className="space-y-6 text-sm">
+              <div className="space-y-5 text-xs">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#e31e24] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#1658b3] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-slate-200 mb-1">Office Address</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <h3 className="font-bold text-white mb-1">Ahmedabad Office</h3>
+                    <p className="text-slate-300 leading-relaxed">
                       303, Maharana Pratap Complex,<br />
                       Opp. Kapadia Guest House, B/H V.S. Hospital,<br />
                       Paldi, Ahmedabad - 380006,<br />
@@ -55,33 +64,33 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-[#e31e24] shrink-0 mt-0.5" />
+                  <Phone className="w-4 h-4 text-[#1658b3] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-slate-200 mb-1">Direct Lines</h3>
-                    <a href="tel:+918866003636" className="text-xs text-slate-300 font-mono block hover:text-white">
+                    <h3 className="font-bold text-white mb-1">Direct Helplines</h3>
+                    <a href="tel:+918866003636" className="text-sky-300 font-mono block hover:text-white mt-0.5">
                       +91 88 66 00 3636
                     </a>
-                    <a href="tel:+918866113636" className="text-xs text-slate-300 font-mono block hover:text-white mt-1">
+                    <a href="tel:+918866113636" className="text-sky-300 font-mono block hover:text-white mt-1">
                       +91 88 66 11 3636
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-[#e31e24] shrink-0 mt-0.5" />
+                  <Mail className="w-4 h-4 text-[#1658b3] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-slate-200 mb-1">Editorial Correspondence</h3>
-                    <a href="mailto:editor@sarapublication.com" className="text-xs text-slate-300 font-mono block hover:text-white">
+                    <h3 className="font-bold text-white mb-1">Editorial Email</h3>
+                    <a href="mailto:editor@sarapublication.com" className="text-sky-300 font-mono block hover:text-white mt-0.5">
                       editor@sarapublication.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-[#e31e24] shrink-0 mt-0.5" />
+                  <Clock className="w-4 h-4 text-[#1658b3] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-slate-200 mb-1">Office Hours</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed font-mono">
+                    <h3 className="font-bold text-white mb-1">Operating Hours</h3>
+                    <p className="text-slate-300 leading-relaxed font-mono text-[11px]">
                       Mon – Sat: 09:30 AM – 06:30 PM IST<br />
                       Sunday: Closed
                     </p>
@@ -91,29 +100,29 @@ export default function ContactPage() {
             </div>
 
             {/* UGC Validation Guarantee */}
-            <div className="bg-white border border-slate-200 p-6 shadow-sm">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2 flex items-center gap-2">
+            <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#0D3B66] mb-2 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                UGC/CAS Verification Note
+                UGC & NAAC Compliance Note
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                All ISBN certificates and book dispatches are recorded under official government publishing registries. Verified for API points in Faculty Promotions across Indian Universities.
+                All ISBN allocations and book publications are recorded under Raja Rammohun Roy National Agency standards. Verified for Academic Performance Indicator (API) scores in Faculty Promotions.
               </p>
             </div>
           </div>
 
-          {/* Contact Inquiry Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white border border-slate-200 p-8 shadow-sm">
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-2">
+          {/* Right Column: Inquiry Form (8 cols) */}
+          <div className="lg:col-span-8">
+            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0D3B66] mb-2">
                 Send an Editorial Inquiry
               </h2>
-              <p className="text-xs text-slate-500 mb-8">
+              <p className="text-xs text-slate-500 mb-6">
                 Fill in your details below and an editorial manager will contact you within 24 business hours.
               </p>
 
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <form className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                       Full Name *
@@ -122,7 +131,7 @@ export default function ContactPage() {
                       type="text"
                       required
                       placeholder="e.g. Dr. Rajesh Sharma"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] transition-all"
                     />
                   </div>
 
@@ -134,12 +143,12 @@ export default function ContactPage() {
                       type="email"
                       required
                       placeholder="name@university.edu"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all font-mono"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] transition-all font-mono"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                       Mobile Number (WhatsApp) *
@@ -148,7 +157,7 @@ export default function ContactPage() {
                       type="tel"
                       required
                       placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all font-mono"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] transition-all font-mono"
                     />
                   </div>
 
@@ -157,13 +166,13 @@ export default function ContactPage() {
                       Subject / Inquiry Type *
                     </label>
                     <select
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] transition-all"
                     >
                       <option value="inquiry">General Publishing Inquiry</option>
                       <option value="status">Manuscript Tracking</option>
                       <option value="pricing">Bulk Printing & Institutional Purchasing</option>
                       <option value="isbn">ISBN & Legal Verification</option>
-                      <option value="dispute">Author Support / Dispute</option>
+                      <option value="dispute">Author Support</option>
                     </select>
                   </div>
                 </div>
@@ -173,24 +182,24 @@ export default function ContactPage() {
                     Your Message / Manuscript Synopsis *
                   </label>
                   <textarea
-                    rows={6}
+                    rows={5}
                     required
                     placeholder="Provide a brief synopsis of your book, anticipated page count, academic discipline, and any specific requirements..."
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-300 text-sm focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all leading-relaxed"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] transition-all leading-relaxed"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="px-8 py-3.5 bg-[#e31e24] hover:bg-[#c4151a] text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm rounded-none"
+                  className="px-7 py-3 bg-[#1658b3] hover:bg-[#124690] text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 rounded-lg shadow-sm hover:shadow"
                 >
-                  <Send className="w-4 h-4" /> Send Inquiry to Editorial Board
+                  <Send className="w-4 h-4 text-[#FFAE00]" /> Send Inquiry to Editorial Board
                 </button>
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

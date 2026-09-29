@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { 
   Search, 
   ShoppingCart, 
@@ -22,6 +23,9 @@ import {
 } from "lucide-react";
 
 export default function SaraOriginalHeader() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   const [searchQuery, setSearchQuery] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
@@ -36,10 +40,10 @@ export default function SaraOriginalHeader() {
     
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 15);
+      setIsScrolled(currentScrollY > 20);
 
       // Hide only on fast scroll down
-      if (currentScrollY > 70 && currentScrollY > lastScrollY) {
+      if (currentScrollY > 80 && currentScrollY > lastScrollY) {
         setShowHeader(false);
       } else {
         setShowHeader(true);
@@ -70,40 +74,50 @@ export default function SaraOriginalHeader() {
     }
   };
 
+  const isTransparent = isHomePage;
+
   return (
     <header 
-      className={`w-full font-sans select-none sticky top-0 z-50 transition-all duration-300 ease-in-out bg-white ${
+      className={`w-full font-sans select-none transition-all duration-300 ease-in-out ${
+        isHomePage ? "fixed top-0 left-0 right-0 z-50" : "sticky top-0 z-50"
+      } ${
         showHeader ? "translate-y-0" : "-translate-y-full"
-      } ${isScrolled ? "shadow-sm border-b border-slate-200" : "border-b border-slate-100"}`}
+      } ${
+        isTransparent
+          ? "bg-transparent text-white border-b border-transparent"
+          : "bg-white text-slate-800 shadow-sm border-b border-slate-200"
+      }`}
     >
       {/* ─────────────────────────────────────────────────────────────
-          1. ULTRA-CLEAN NOTION-PRESS INSPIRED TOP UTILITY STRIP (Light & Thin)
+          1. TOP UTILITY STRIP (Hidden on homepage transparent mode so hero shows from pixel 0)
          ───────────────────────────────────────────────────────────── */}
-      <div className="w-full bg-[#f8fafc] border-b border-slate-100 py-1 px-4 sm:px-8 hidden md:block text-[11px] text-slate-500">
-        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Phone className="w-3 h-3 text-slate-400" />
-            <span>Call us at:</span>
-            <a href="tel:+918866003636" className="font-semibold text-slate-700 hover:text-[#1658b3]">
-              +91-8866003636
-            </a>
-            <span className="text-slate-300 mx-1">|</span>
-            <span className="text-slate-500">Academic Publishing & UGC Valid ISBN</span>
-          </div>
+      {!isTransparent && (
+        <div className="w-full py-1.5 px-4 sm:px-8 hidden md:block text-[11px] transition-colors border-b bg-[#f8fafc] border-slate-100 text-slate-500">
+          <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Phone className="w-3 h-3 text-slate-400" />
+              <span>Call us at:</span>
+              <a href="tel:+918866003636" className="font-semibold text-slate-700 hover:text-[#1658b3]">
+                +91-8866003636
+              </a>
+              <span className="text-slate-300 mx-1">|</span>
+              <span className="text-slate-500">Academic Publishing & UGC Valid ISBN</span>
+            </div>
 
-          <div className="flex items-center gap-4">
-            <Link href="/author-guidelines" className="hover:text-[#1658b3] transition">
-              Author Guidelines
-            </Link>
-            <Link href="/faq" className="hover:text-[#1658b3] transition">
-              FAQ
-            </Link>
-            <Link href="/contact" className="hover:text-[#1658b3] transition">
-              Contact Editorial
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/author-guidelines" className="hover:text-[#1658b3] transition">
+                Author Guidelines
+              </Link>
+              <Link href="/faq" className="hover:text-[#1658b3] transition">
+                FAQ
+              </Link>
+              <Link href="/contact" className="hover:text-[#1658b3] transition">
+                Contact Editorial
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
           2. MAIN COMPACT HEADER ROW (Brand | Nav Menus | Search | CTA)
@@ -113,7 +127,7 @@ export default function SaraOriginalHeader() {
         {/* Left: Brand Logo + Identity */}
         <div className="flex items-center gap-6 shrink-0">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 bg-white p-1 shadow-xs">
               <Image 
                 src="/branding/sara-logo.png" 
                 alt="Sara Book Publication" 
@@ -124,31 +138,31 @@ export default function SaraOriginalHeader() {
               />
             </div>
             <div>
-              <span className="text-lg sm:text-xl font-black text-[#0D3B66] tracking-tight uppercase leading-none block font-sans">
+              <span className="text-lg sm:text-xl font-black tracking-tight uppercase leading-none block font-sans text-slate-900">
                 SARA PUBLICATION
               </span>
-              <span className="text-[9px] font-mono tracking-wider text-slate-400 uppercase font-semibold block mt-0.5">
+              <span className="text-[9px] font-mono tracking-wider uppercase font-bold block mt-0.5 text-slate-600">
                 EST. 2011 • ACADEMIC PRESS
               </span>
             </div>
           </Link>
 
           {/* Desktop Clean Dropdown Navigation (Notion Press Style) */}
-          <nav className="hidden lg:flex items-center gap-1 text-[13px] font-medium text-slate-700 ml-2">
+          <nav className="hidden lg:flex items-center gap-1 text-[13px] font-bold ml-2 text-slate-900">
             
             {/* Discover Books Dropdown */}
             <div className="relative" onMouseLeave={() => setDiscoverOpen(false)}>
               <button 
                 onMouseEnter={() => setDiscoverOpen(true)}
                 onClick={() => setDiscoverOpen(!discoverOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-md hover:text-[#1658b3] hover:bg-slate-50 transition font-semibold"
+                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold hover:text-[#1658b3] hover:bg-black/5"
               >
                 <span>Discover books</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${discoverOpen ? "rotate-180" : ""}`} />
               </button>
 
               {discoverOpen && (
-                <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50">
+                <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50 text-slate-800">
                   <Link 
                     href="/bookshelf"
                     onClick={() => setDiscoverOpen(false)}
@@ -190,7 +204,7 @@ export default function SaraOriginalHeader() {
               <button 
                 onMouseEnter={() => setWritersOpen(true)}
                 onClick={() => setWritersOpen(!writersOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-md hover:text-[#1658b3] hover:bg-slate-50 transition font-semibold"
+                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold text-slate-900 hover:text-[#1658b3] hover:bg-black/5"
               >
                 <span>For Writers</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${writersOpen ? "rotate-180" : ""}`} />
@@ -245,7 +259,7 @@ export default function SaraOriginalHeader() {
               placeholder="Search by Book Title, Author Name, or ISBN..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-4 pr-12 text-xs sm:text-[13px] text-slate-900 bg-white border border-slate-200 focus:border-rose-400 rounded-md shadow-2xs focus:outline-none placeholder:text-slate-400 transition"
+              className="w-full h-10 pl-4 pr-12 text-xs sm:text-[13px] rounded-md shadow-xs focus:outline-none transition bg-white/95 text-slate-900 placeholder:text-slate-500 border border-slate-300 focus:border-[#1658b3] focus:bg-white"
             />
             <button
               type="submit"
@@ -265,10 +279,10 @@ export default function SaraOriginalHeader() {
             <button
               type="button"
               onClick={() => setCurrencyOpen(!currencyOpen)}
-              className="flex items-center gap-1 text-slate-600 hover:text-slate-900 text-xs font-medium px-2 py-1.5 rounded transition"
+              className="flex items-center gap-1 text-xs font-bold px-2 py-1.5 rounded transition text-slate-800 hover:text-black hover:bg-black/5"
             >
               <span>{currency === "INR" ? "English (INR)" : "English (USD)"}</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <ChevronDown className="w-3 h-3 text-slate-700" />
             </button>
 
             {currencyOpen && (
@@ -292,10 +306,10 @@ export default function SaraOriginalHeader() {
           {/* Cart Icon */}
           <Link 
             href="/publish" 
-            className="p-2 text-slate-600 hover:text-rose-500 transition relative"
+            className="p-2 transition relative text-slate-800 hover:text-rose-500 hover:bg-black/5 rounded-md"
             aria-label="View Cart"
           >
-            <ShoppingCart className="w-5 h-5 stroke-[1.75]" />
+            <ShoppingCart className="w-5 h-5 stroke-[2]" />
           </Link>
 
           {/* Clean Red GET STARTED Button (Notion Press Exact Look) */}
@@ -309,7 +323,7 @@ export default function SaraOriginalHeader() {
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setDrawerOpen(true)}
-            className="p-2 rounded-md text-slate-700 hover:bg-slate-100 lg:hidden transition"
+            className="p-2 rounded-md lg:hidden transition text-slate-900 hover:bg-black/5"
             aria-label="Toggle navigation menu"
           >
             <Menu className="w-6 h-6" />

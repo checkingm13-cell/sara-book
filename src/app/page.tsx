@@ -26,22 +26,14 @@ import {
   Landmark,
   Scale
 } from "lucide-react";
-import booksData from "@/data/books.json";
-
-interface RawBook {
-  title: string;
-  slug: string;
-  category: string;
-  imageUrl: string;
-  detailUrl: string;
-  subtitle?: string;
-}
+import { ALL_BOOKS, Book } from "@/data/books";
+import BookCover from "@/components/BookCover";
 
 export default function SwissHomepage() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Books from actual 1,200+ Sara Book database
-  const allBooks: RawBook[] = booksData as RawBook[];
+  // Books from actual Sara Book database
+  const allBooks: Book[] = ALL_BOOKS;
   
   // Clean categorized shelves
   const newReleases = allBooks.slice(0, 14);
@@ -116,11 +108,11 @@ export default function SwissHomepage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO CAROUSEL (Responsive, Never Cropped on Mobile)
-          Uses true 16/9 aspect ratio with zero fixed-height locks
+          1. HERO CAROUSEL (Full Screen Width & Full Screen Height Behind Transparent Navbar)
+          Navbar floats transparently directly on top of the slide image
          ───────────────────────────────────────────────────────────── */}
-      <section className="relative w-full bg-[#0A1628] overflow-hidden select-none">
-        <div className="relative w-full aspect-[16/9] max-h-[620px]">
+      <section className="relative w-full overflow-hidden select-none pt-0">
+        <div className="relative w-full aspect-[16/9] max-h-[660px]">
           {heroSlides.map((slide, index) => (
             <div
               key={slide.id}
@@ -133,7 +125,7 @@ export default function SwissHomepage() {
                 alt={slide.title}
                 fill
                 priority={index === 0}
-                className="object-contain sm:object-cover object-center w-full h-full"
+                className="object-cover object-top w-full h-full"
               />
             </div>
           ))}
@@ -237,17 +229,12 @@ export default function SwissHomepage() {
                 href={`/book/${book.slug}`}
                 className="group shrink-0 w-[120px] sm:w-[155px] md:w-[170px] lg:w-[185px] xl:w-[195px] block focus:outline-none"
               >
-                <div className="relative aspect-[1/1.5] w-full rounded-xs overflow-hidden shadow-xs group-hover:shadow-lg transition-all duration-200 border border-slate-200/80 bg-slate-100 flex items-center justify-center">
-                  <Image
-                    src={book.imageUrl}
-                    alt={book.title}
-                    fill
-                    sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 195px"
-                    className="object-cover w-full h-full"
-                    loading="lazy"
-                  />
-                  <div className="absolute left-0 top-0 bottom-0 w-2 sm:w-2.5 bg-gradient-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
-                </div>
+                <BookCover
+                  src={book.coverImage}
+                  title={book.title}
+                  author={book.author}
+                  category={book.categoryLabel}
+                />
               </Link>
             ))}
           </div>
@@ -301,17 +288,12 @@ export default function SwissHomepage() {
                 href={`/book/${book.slug}`}
                 className="group shrink-0 w-[120px] sm:w-[155px] md:w-[170px] lg:w-[185px] xl:w-[195px] block focus:outline-none"
               >
-                <div className="relative aspect-[1/1.5] w-full rounded-xs overflow-hidden shadow-xs group-hover:shadow-lg transition-all duration-200 border border-slate-200/80 bg-slate-100 flex items-center justify-center">
-                  <Image
-                    src={book.imageUrl}
-                    alt={book.title}
-                    fill
-                    sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 195px"
-                    className="object-cover w-full h-full"
-                    loading="lazy"
-                  />
-                  <div className="absolute left-0 top-0 bottom-0 w-2 sm:w-2.5 bg-gradient-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
-                </div>
+                <BookCover
+                  src={book.coverImage}
+                  title={book.title}
+                  author={book.author}
+                  category={book.categoryLabel}
+                />
               </Link>
             ))}
           </div>
@@ -394,17 +376,12 @@ export default function SwissHomepage() {
                 href={`/book/${book.slug}`}
                 className="group shrink-0 w-[120px] sm:w-[155px] md:w-[170px] lg:w-[185px] xl:w-[195px] block focus:outline-none"
               >
-                <div className="relative aspect-[1/1.5] w-full rounded-xs overflow-hidden shadow-xs group-hover:shadow-lg transition-all duration-200 border border-slate-200/80 bg-slate-100 flex items-center justify-center">
-                  <Image
-                    src={book.imageUrl}
-                    alt={book.title}
-                    fill
-                    sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 195px"
-                    className="object-cover w-full h-full"
-                    loading="lazy"
-                  />
-                  <div className="absolute left-0 top-0 bottom-0 w-2 sm:w-2.5 bg-gradient-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
-                </div>
+                <BookCover
+                  src={book.coverImage}
+                  title={book.title}
+                  author={book.author}
+                  category={book.categoryLabel}
+                />
               </Link>
             ))}
           </div>

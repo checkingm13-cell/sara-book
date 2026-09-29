@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Check, Sparkles, ShieldCheck, Globe, BookOpen } from "lucide-react";
+import { ArrowLeft, Check, Sparkles, ShieldCheck, Globe, BookOpen, ChevronRight } from "lucide-react";
 
 export const metadata = {
   title: "Publishing Packages & Pricing | Sara Book Publication",
@@ -96,106 +96,136 @@ export default function PackagesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-white text-slate-800 font-sans">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-500 hover:text-slate-900 transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Home
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
           </Link>
+
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-rose-50 text-rose-900 border border-rose-200 text-xs font-mono uppercase tracking-widest font-semibold mb-3">
-              Official 2026 Tier Schedule
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
+              <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> Transparent Academic Publishing Plans
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
-              Publication Packages & Transparent Pricing
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
+              Publication Packages & Pricing
             </h1>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
               Every plan guarantees a verified 13-digit UGC-valid ISBN, professional InDesign typesetting, custom cover artwork, and rapid 15-day worldwide distribution.
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Pricing Cards */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+      {/* ─────────────────────────────────────────────────────────────
+          2. PRICING CARDS
+         ───────────────────────────────────────────────────────────── */}
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#0D3B66] tracking-tight uppercase">
+            Choose Your Publishing Plan
+          </h2>
+          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+            Zero hidden royalties. Full copyright retention. 100% compliant with UGC CAS point guidelines.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 mb-14 items-stretch">
           {tiers.map((t, idx) => (
             <div
               key={idx}
-              className={`flex flex-col justify-between border bg-white rounded-none transition-all p-6 relative ${
+              className={`flex flex-col justify-between rounded-2xl transition-all duration-200 p-6 relative ${
                 t.popular
-                  ? "border-[#e31e24] shadow-md ring-1 ring-[#e31e24]"
-                  : "border-slate-200 hover:border-slate-300 shadow-sm"
+                  ? "bg-[#0A1628] text-white shadow-xl ring-2 ring-[#FFAE00] -translate-y-1"
+                  : "bg-white text-slate-800 border border-slate-200 hover:border-slate-300 hover:shadow-md"
               }`}
             >
               {t.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[#e31e24] text-white text-[10px] font-mono font-bold tracking-widest uppercase rounded">
-                  Most Selected
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#FFAE00] text-[#0A1628] text-[10px] font-mono font-black tracking-widest uppercase rounded-full shadow-md flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 fill-current" /> Most Popular
                 </div>
               )}
 
               <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="font-bold text-lg text-slate-900 uppercase tracking-wide">{t.name}</h3>
-                  <span className="text-[10px] font-mono px-2 py-0.5 bg-slate-100 text-slate-600 rounded">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <h3 className={`font-black text-lg tracking-wide uppercase ${
+                    t.popular ? "text-white" : "text-[#0D3B66]"
+                  }`}>
+                    {t.name}
+                  </h3>
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase ${
+                    t.popular ? "bg-white/10 text-sky-300" : "bg-blue-50 text-[#1658b3]"
+                  }`}>
                     {t.badge}
                   </span>
                 </div>
 
                 <div className="mb-4">
-                  <div className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+                  <div className={`text-3xl font-black tracking-tight ${
+                    t.popular ? "text-white" : "text-[#0D3B66]"
+                  }`}>
                     {t.priceInr}
                   </div>
-                  <div className="text-xs font-mono text-slate-500">
-                    International: <strong className="text-slate-700">{t.priceUsd}</strong>
+                  <div className={`text-[11px] font-mono mt-0.5 ${
+                    t.popular ? "text-slate-300" : "text-slate-500"
+                  }`}>
+                    Global Price: <strong className={t.popular ? "text-white font-bold" : "text-slate-700"}>{t.priceUsd}</strong>
                   </div>
                 </div>
 
-                <p className="text-[11px] text-slate-500 leading-normal mb-6 min-h-[34px]">
+                <p className={`text-xs leading-relaxed mb-6 min-h-[44px] ${
+                  t.popular ? "text-slate-300" : "text-slate-500"
+                }`}>
                   {t.highlight}
                 </p>
 
-                <div className="space-y-3 border-t border-slate-100 pt-4 text-xs">
+                <div className={`space-y-3 border-t pt-4 text-xs ${
+                  t.popular ? "border-white/10" : "border-slate-100"
+                }`}>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Base Pages:</span>
-                    <strong className="text-slate-900 font-mono">{t.pages}</strong>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Base Pages:</span>
+                    <strong className={`font-mono ${t.popular ? "text-white" : "text-slate-800"}`}>{t.pages}</strong>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Author Copies:</span>
-                    <strong className="text-slate-900">{t.copies}</strong>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Author Copies:</span>
+                    <strong className={t.popular ? "text-white" : "text-slate-800"}>{t.copies}</strong>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Interior Style:</span>
-                    <strong className="text-slate-900">{t.interior}</strong>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Interior Style:</span>
+                    <strong className={t.popular ? "text-white" : "text-slate-800"}>{t.interior}</strong>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Paper Grade:</span>
-                    <span className="text-slate-700">{t.paper}</span>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Paper Grade:</span>
+                    <span className={t.popular ? "text-slate-200" : "text-slate-700"}>{t.paper}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Royalty:</span>
-                    <strong className={`${t.royalty !== "Not Applicable" ? "text-emerald-700" : "text-slate-600"}`}>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Royalty:</span>
+                    <strong className={t.royalty !== "Not Applicable" ? "text-emerald-400 font-bold" : (t.popular ? "text-slate-400" : "text-slate-500")}>
                       {t.royalty}
                     </strong>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Extra Page Rate:</span>
-                    <span className="text-slate-700 font-mono">{t.extraPageRate}</span>
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Extra Page:</span>
+                    <span className={`font-mono ${t.popular ? "text-slate-200" : "text-slate-700"}`}>{t.extraPageRate}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className={`pt-5 mt-6 border-t ${
+                t.popular ? "border-white/10" : "border-slate-100"
+              }`}>
                 <Link
                   href={`/publish?plan=${t.name.toLowerCase()}`}
-                  className={`w-full block text-center py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                  className={`w-full block text-center py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
                     t.popular
-                      ? "bg-[#e31e24] hover:bg-[#c4151a] text-white"
-                      : "bg-slate-900 hover:bg-slate-800 text-white"
+                      ? "bg-[#FFAE00] hover:bg-[#e69d00] text-[#0A1628] shadow-md font-black"
+                      : "bg-[#0A1628] hover:bg-slate-800 text-white"
                   }`}
                 >
                   Select {t.name}
@@ -206,8 +236,8 @@ export default function PackagesPage() {
         </div>
 
         {/* Feature Comparison Table */}
-        <div className="bg-white border border-slate-200 p-8 shadow-sm">
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6 flex items-center gap-2">
+        <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#0D3B66] mb-6 flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-emerald-600" />
             Standard Inclusions in Every Sara Book Publication Package
           </h2>
@@ -222,7 +252,7 @@ export default function PackagesPage() {
             <div className="flex items-start gap-3">
               <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">Custom Cover Page Design</h4>
+                <h4 className="text-xs font-bold text-slate-900 uppercase">Custom Cover Artwork Design</h4>
                 <p className="text-xs text-slate-500 mt-1">Full-colour high-gloss or matte laminate cover designed by professional artists.</p>
               </div>
             </div>
@@ -256,7 +286,7 @@ export default function PackagesPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

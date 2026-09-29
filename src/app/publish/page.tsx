@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, UploadCloud, CheckCircle2, ShieldCheck, FileCheck } from "lucide-react";
+import { ArrowLeft, UploadCloud, CheckCircle2, ShieldCheck, FileCheck, ChevronRight } from "lucide-react";
 
 export default function PublishProposalPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,49 +23,60 @@ export default function PublishProposalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 py-10 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition mb-6">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Homepage
-        </Link>
+    <div className="min-h-screen bg-white text-slate-800 font-sans">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
+          </Link>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-          <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full mb-3 border border-indigo-500/30">
-              <UploadCloud className="w-3.5 h-3.5" />
-              Manuscript Submission Portal
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
+              <UploadCloud className="w-3 h-3 text-[#FFAE00]" /> Manuscript Submission Portal
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
               Publish Your Book with UGC Valid ISBN
             </h1>
-            <p className="mt-2 text-sm text-slate-300">
-              Fill in your book proposal details. Our editorial board reviews manuscripts within 48 to 72 hours.
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Fill in your book proposal details below. Our editorial board in Ahmedabad reviews and responds to academic manuscripts within 48 to 72 hours.
             </p>
           </div>
+        </div>
+      </section>
 
+      {/* ─────────────────────────────────────────────────────────────
+          2. PROPOSAL FORM CONTAINER
+         ───────────────────────────────────────────────────────────── */}
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           {submitted ? (
             <div className="p-8 sm:p-12 text-center">
               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-900">Proposal Successfully Submitted!</h2>
-              <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto">
-                Thank you, <strong>{formData.authorName}</strong>. Your proposal for <em>"{formData.bookTitle}"</em> has been logged with reference ID <span className="font-mono font-bold text-indigo-600">SBP-{Math.floor(100000 + Math.random() * 900000)}</span>.
+              <h2 className="text-2xl font-bold text-[#0D3B66]">Proposal Successfully Submitted!</h2>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                Thank you, <strong>{formData.authorName}</strong>. Your proposal for <em>"{formData.bookTitle}"</em> has been logged with reference ID <span className="font-mono font-bold text-[#1658b3]">SBP-{Math.floor(100000 + Math.random() * 900000)}</span>.
               </p>
-              <div className="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-200 max-w-md mx-auto text-xs text-slate-500">
-                Our editorial coordinator will reach out to <strong>{formData.email}</strong> and <strong>{formData.phone}</strong> for the synopsis verification.
+              <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200 max-w-md mx-auto text-xs text-slate-500">
+                Our editorial coordinator will reach out to <strong>{formData.email}</strong> and <strong>{formData.phone}</strong> for manuscript file verification.
               </div>
               <Link
                 href="/"
-                className="mt-8 inline-block bg-slate-900 hover:bg-indigo-600 text-white font-semibold text-sm px-6 py-3 rounded-xl transition"
+                className="mt-8 inline-block bg-[#0A1628] hover:bg-[#1658b3] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg transition"
               >
-                Return to Homepage
+                Return to Store
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
                     Primary Author Name *
@@ -76,7 +87,7 @@ export default function PublishProposalPage() {
                     placeholder="Dr. / Prof. / Scholar Name"
                     value={formData.authorName}
                     onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                   />
                 </div>
                 <div>
@@ -89,12 +100,12 @@ export default function PublishProposalPage() {
                     placeholder="e.g. Gujarat University"
                     value={formData.affiliation}
                     onChange={(e) => setFormData({ ...formData, affiliation: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
                     Email Address *
@@ -105,7 +116,7 @@ export default function PublishProposalPage() {
                     placeholder="author@university.edu"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] font-mono"
                   />
                 </div>
                 <div>
@@ -118,7 +129,7 @@ export default function PublishProposalPage() {
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3] font-mono"
                   />
                 </div>
               </div>
@@ -133,19 +144,19 @@ export default function PublishProposalPage() {
                   placeholder="e.g. Modern Innovations in Agricultural Metagenomics"
                   value={formData.bookTitle}
                   onChange={(e) => setFormData({ ...formData, bookTitle: e.target.value })}
-                  className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                  className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div>
                   <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
-                    Subject Area
+                    Academic Discipline
                   </label>
                   <select
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                   >
                     <option value="LIFE_SCIENCES">Life Sciences</option>
                     <option value="MEDICAL_SCIENCE">Medical Science</option>
@@ -160,7 +171,7 @@ export default function PublishProposalPage() {
                   <select
                     value={formData.language}
                     onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                   >
                     <option value="English">English</option>
                     <option value="Hindi">Hindi</option>
@@ -175,7 +186,7 @@ export default function PublishProposalPage() {
                     type="number"
                     value={formData.estimatedPages}
                     onChange={(e) => setFormData({ ...formData, estimatedPages: e.target.value })}
-                    className="w-full text-sm border border-slate-300 rounded-xl p-3 focus:outline-indigo-600"
+                    className="w-full text-xs border border-slate-300 rounded-lg p-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1658b3]"
                   />
                 </div>
               </div>
@@ -183,7 +194,7 @@ export default function PublishProposalPage() {
               <div className="pt-4 border-t border-slate-200">
                 <button
                   type="submit"
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm py-3.5 rounded-xl shadow-md shadow-indigo-200 transition"
+                  className="w-full bg-[#1658b3] hover:bg-[#124690] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg shadow-sm hover:shadow transition"
                 >
                   Submit Book Proposal for ISBN Evaluation
                 </button>
@@ -191,7 +202,7 @@ export default function PublishProposalPage() {
             </form>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

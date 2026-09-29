@@ -17,7 +17,9 @@ Welcome to the central architectural decision vault for the complete modernizati
 | `07` | [[07 - Executive Technical Audit & Forensic Evidence Report]] | Forensic CLI evidence package, raw HTTP headers, and problem/solution summary for owner review and peer AI validation. |
 | `08` | [[08 - Legacy Server Compromise, CloudLinux Quarantine, and Safe Modernization Plan]] | Breakdown of why the security guy put the site on CloudLinux and Sucuri, why that emergency fix choked the site, and the safe modernization strategy. |
 | `09` | [[09 - Swiss Typographic & Noma Bar Gestalt Design System]] | Visual engineering specification: 3-color strict palette (#0A192F, #E5A93C, #F7F6EE), asymmetric grid layout, and Noma Bar negative space gestalt iconography. |
-| `10` | [[10 - Competitor Intelligence & Visual UX Benchmark Audit]] | Forensic audit of 6 competitor websites (Mahi, Vista, Notion Press, BlueRose, White Falcon, Zorba, Pothi) across 42 screenshots, mapping high-converting UX patterns. |
+| `10` | [[10 - Competitor Intelligence & Visual UX Benchmark Audit]] | Visual layout benchmarks, high-converting feature breakdowns, and UX gaps from top academic book publishers (Elsevier, Springer Nature, Notion Press, Wiley). |
+| `11` | [[11 - Database Architecture, Catalog Forensic Audit & Historical Orders]] | Forensic audit of `sarapubl_sarabook_new.sql` (23 tables, 486 ISBN books, 371 author submissions, 136 bookstore orders, package matrices). |
+| `12` | [[12 - Next.js Database Upgrade & Migration Specification]] | Step-by-step engineering roadmap, Prisma schema specification, PHP serialized array unpacking, and Next.js 16 Server Component queries. |
 
 ---
 
@@ -26,3 +28,4 @@ Welcome to the central architectural decision vault for the complete modernizati
 2. **Modernize Frontend Architecture**: Migrate from legacy raw PHP/Bootstrap 4 to high-performance, edge-rendered pages with perfect Google Core Web Vitals.
 3. **Capture Search & AI Dominance**: Maximize visibility across Google SERP, Google AI Overviews (SGE/AIO), Perplexity, and conversational answer engines (AEO/GEO).
 4. **Transform Conversion Rates (CRO)**: Convert academic professors and PhD researchers into paying book publishing authors via self-service ISBN tools, pricing transparency, and modern UX.
+5. **Type-Safe Database Modernization**: Upgrade legacy MyISAM tables with PHP serialized blobs into a normalized, type-safe Prisma / SQLite / PostgreSQL schema.
