@@ -16,6 +16,8 @@ import {
   Award
 } from "lucide-react";
 
+import SubpageHero from "@/components/SubpageHero";
+
 export default function PackagesPage() {
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
 
@@ -131,58 +133,40 @@ export default function PackagesPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER
+          1. HEADER BANNER (Architectural Swiss Blueprint)
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
-          </Link>
-
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-                <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> UGC-CARE & NAAC Valid Academic Plans
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
-                Publishing Packages & Pricing
-              </h1>
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                All-inclusive academic book publication with authentic 13-digit ISBN allocation, professional InDesign typesetting, custom cover design, and fast guaranteed courier delivery.
-              </p>
-            </div>
-
-            {/* Currency Switcher */}
-            <div className="bg-white/10 p-1 rounded-xl border border-white/15 flex items-center shrink-0 self-start md:self-auto">
-              <button
-                type="button"
-                onClick={() => setCurrency("INR")}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  currency === "INR"
-                    ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                ₹ INR (India)
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrency("USD")}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  currency === "USD"
-                    ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                $ USD (International)
-              </button>
-            </div>
+      <SubpageHero
+        title="Publishing Packages & Pricing"
+        subtitle="All-inclusive academic book publication with authentic 13-digit ISBN allocation, professional InDesign typesetting, custom cover design, and fast guaranteed courier delivery."
+        badgeText="UGC-CARE & NAAC Valid Academic Plans"
+        badgeIcon={ShieldCheck}
+        actionSlot={
+          <div className="bg-white/10 p-1.5 rounded-2xl border border-white/20 flex items-center shadow-lg backdrop-blur-md">
+            <button
+              type="button"
+              onClick={() => setCurrency("INR")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                currency === "INR"
+                  ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              ₹ INR (India)
+            </button>
+            <button
+              type="button"
+              onClick={() => setCurrency("USD")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                currency === "USD"
+                  ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              $ USD (Global)
+            </button>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ─────────────────────────────────────────────────────────────
           2. PRICING CARDS

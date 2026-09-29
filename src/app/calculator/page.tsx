@@ -15,6 +15,8 @@ import {
   PackageCheck
 } from "lucide-react";
 
+import SubpageHero from "@/components/SubpageHero";
+
 export default function CalculatorPage() {
   const [pageCount, setPageCount] = useState<number>(140);
   const [format, setFormat] = useState<"paperback" | "hardcover">("paperback");
@@ -43,30 +45,21 @@ export default function CalculatorPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER
+          1. HEADER BANNER (Architectural Swiss Blueprint)
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
-          </Link>
-
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-              <Calculator className="w-3 h-3 text-[#FFAE00]" /> Transparent Academic Printing & Royalty Engine
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
-              Author Royalty & Print Cost Calculator
-            </h1>
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Simulate your book manufacturing cost, distribution discount margins, and real author royalty earnings across India and international academic channels.
-            </p>
+      <SubpageHero
+        title="Author Royalty & Print Cost Calculator"
+        subtitle="Simulate your book manufacturing cost, distribution discount margins, and real author royalty earnings across India and international academic channels."
+        badgeText="Transparent Academic Printing & Royalty Engine"
+        badgeIcon={Calculator}
+        actionSlot={
+          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-slate-200">Live Formula Engine:</span>
+            <strong className="text-[#FFAE00] font-mono">100% Payout Accuracy</strong>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ─────────────────────────────────────────────────────────────
           2. INTERACTIVE SPLIT LAYOUT

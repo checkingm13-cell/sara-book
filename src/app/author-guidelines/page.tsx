@@ -16,6 +16,8 @@ import {
   AlertCircle
 } from "lucide-react";
 
+import SubpageHero from "@/components/SubpageHero";
+
 export default function AuthorGuidelinesPage() {
   const [activeSection, setActiveSection] = useState("preparation");
 
@@ -56,30 +58,25 @@ export default function AuthorGuidelinesPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER
+          1. HEADER BANNER (Architectural Swiss Blueprint)
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white transition-colors mb-4"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
-          </Link>
-
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-              <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> Official Editorial Handbook & Criteria
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
-              Author Guidelines & Publishing Standards
-            </h1>
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Comprehensive guidelines for submitting monographs, textbooks, edited volumes, and conference proceedings conforming to UGC API Career Advancement norms.
-            </p>
+      <SubpageHero
+        title="Author Guidelines & Publishing Standards"
+        subtitle="Comprehensive guidelines for submitting monographs, textbooks, edited volumes, and conference proceedings conforming to UGC API Career Advancement norms."
+        badgeText="Official Editorial Handbook & Criteria"
+        badgeIcon={ShieldCheck}
+        actionSlot={
+          <div className="flex items-center gap-3">
+            <Link
+              href="/download"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFAE00] hover:bg-[#e69d00] text-[#0A1628] text-xs font-black uppercase tracking-wider transition shadow-md"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Get Word Template</span>
+            </Link>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ─────────────────────────────────────────────────────────────
           2. MAIN CONTENT WITH STICKY TABLE OF CONTENTS
