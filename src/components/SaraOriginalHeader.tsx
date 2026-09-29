@@ -32,8 +32,37 @@ export default function SaraOriginalHeader() {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [discoverOpen, setDiscoverOpen] = useState(false);
   const [writersOpen, setWritersOpen] = useState(false);
+  const [mobileDiscoverOpen, setMobileDiscoverOpen] = useState(false);
+  const [mobileWritersOpen, setMobileWritersOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Click outside ref handling for desktop dropdowns
+  const navRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setDiscoverOpen(false);
+        setWritersOpen(false);
+        setCurrencyOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDiscoverOpen(false);
+        setWritersOpen(false);
+        setCurrencyOpen(false);
+        setDrawerOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -122,7 +151,7 @@ export default function SaraOriginalHeader() {
       {/* ─────────────────────────────────────────────────────────────
           2. MAIN COMPACT HEADER ROW (Brand | Nav Menus | Search | CTA)
          ───────────────────────────────────────────────────────────── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 lg:gap-6">
+      <div ref={navRef} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 lg:gap-6">
         
         {/* Left: Brand Logo + Identity */}
         <div className="flex items-center gap-6 shrink-0">
@@ -153,30 +182,35 @@ export default function SaraOriginalHeader() {
             {/* Discover Books Dropdown */}
             <div className="relative" onMouseLeave={() => setDiscoverOpen(false)}>
               <button 
-                onMouseEnter={() => setDiscoverOpen(true)}
+                type="button"
+                onMouseEnter={() => { setDiscoverOpen(true); setWritersOpen(false); }}
                 onClick={() => setDiscoverOpen(!discoverOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold hover:text-[#1658b3] hover:bg-black/5"
+                aria-expanded={discoverOpen}
+                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold text-slate-900 hover:text-[#1658b3] hover:bg-black/5 cursor-pointer"
               >
                 <span>Discover books</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${discoverOpen ? "rotate-180" : ""}`} />
               </button>
 
               {discoverOpen && (
-                <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50 text-slate-800">
+                <div className="absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl shadow-2xl border border-slate-200/80 p-2 z-50 text-slate-800 animate-in fade-in duration-150">
+                  <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold border-b border-slate-100 mb-1">
+                    Book Catalog
+                  </div>
                   <Link 
                     href="/bookshelf"
                     onClick={() => setDiscoverOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold text-slate-800 hover:bg-blue-50 hover:text-[#1658b3] transition"
                   >
                     <BookOpen className="w-4 h-4 text-[#1658b3]" />
-                    <span>Browse All Titles</span>
+                    <span>Browse All Titles (100+)</span>
                   </Link>
                   <Link 
                     href="/bookshelf?q=Medical"
                     onClick={() => setDiscoverOpen(false)}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1.5" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-1.5" />
                     <span>Medical & Healthcare</span>
                   </Link>
                   <Link 
@@ -184,7 +218,7 @@ export default function SaraOriginalHeader() {
                     onClick={() => setDiscoverOpen(false)}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1.5" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500 ml-1.5" />
                     <span>Engineering & Tech</span>
                   </Link>
                   <Link 
@@ -192,8 +226,8 @@ export default function SaraOriginalHeader() {
                     onClick={() => setDiscoverOpen(false)}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1.5" />
-                    <span>Literature & Stories</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-1.5" />
+                    <span>Literature & Humanities</span>
                   </Link>
                 </div>
               )}
@@ -202,20 +236,25 @@ export default function SaraOriginalHeader() {
             {/* For Writers / Authors Dropdown */}
             <div className="relative" onMouseLeave={() => setWritersOpen(false)}>
               <button 
-                onMouseEnter={() => setWritersOpen(true)}
+                type="button"
+                onMouseEnter={() => { setWritersOpen(true); setDiscoverOpen(false); }}
                 onClick={() => setWritersOpen(!writersOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold text-slate-900 hover:text-[#1658b3] hover:bg-black/5"
+                aria-expanded={writersOpen}
+                className="flex items-center gap-1 px-3 py-2 rounded-md transition font-bold text-slate-900 hover:text-[#1658b3] hover:bg-black/5 cursor-pointer"
               >
                 <span>For Writers</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${writersOpen ? "rotate-180" : ""}`} />
               </button>
 
               {writersOpen && (
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50">
+                <div className="absolute top-full left-0 mt-1.5 w-60 bg-white rounded-xl shadow-2xl border border-slate-200/80 p-2 z-50 text-slate-800 animate-in fade-in duration-150">
+                  <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold border-b border-slate-100 mb-1">
+                    Author Services
+                  </div>
                   <Link 
                     href="/packages"
                     onClick={() => setWritersOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold text-slate-800 hover:bg-blue-50 hover:text-[#1658b3] transition"
                   >
                     <Package className="w-4 h-4 text-[#1658b3]" />
                     <span>Packages & Pricing</span>
@@ -385,55 +424,121 @@ export default function SaraOriginalHeader() {
               </form>
             </div>
 
-            {/* Mobile Links */}
+            {/* Mobile Links with Interactive Accordion Dropdowns */}
             <div className="flex-1 overflow-y-auto py-2 px-3 space-y-1">
+              
+              {/* Accordion 1: Discover Books */}
+              <div className="border-b border-slate-100 pb-1">
+                <button
+                  type="button"
+                  onClick={() => setMobileDiscoverOpen(!mobileDiscoverOpen)}
+                  className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-slate-800 hover:bg-slate-50 transition text-sm font-bold"
+                >
+                  <div className="flex items-center gap-3">
+                    <BookOpen className="w-4 h-4 text-[#1658b3]" />
+                    <span>Discover Books</span>
+                  </div>
+                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileDiscoverOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {mobileDiscoverOpen && (
+                  <div className="pl-9 pr-2 py-1 space-y-1 bg-slate-50/60 rounded-lg mt-1 mb-1">
+                    <Link
+                      href="/bookshelf"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
+                    >
+                      Browse All Titles (100+) →
+                    </Link>
+                    <Link
+                      href="/bookshelf?q=Medical"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Medical & Healthcare
+                    </Link>
+                    <Link
+                      href="/bookshelf?q=Engineering"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Engineering & Tech
+                    </Link>
+                    <Link
+                      href="/bookshelf?q=Literature"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Literature & Humanities
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 2: For Writers */}
+              <div className="border-b border-slate-100 pb-1">
+                <button
+                  type="button"
+                  onClick={() => setMobileWritersOpen(!mobileWritersOpen)}
+                  className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-slate-800 hover:bg-slate-50 transition text-sm font-bold"
+                >
+                  <div className="flex items-center gap-3">
+                    <Package className="w-4 h-4 text-[#1658b3]" />
+                    <span>For Writers</span>
+                  </div>
+                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileWritersOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {mobileWritersOpen && (
+                  <div className="pl-9 pr-2 py-1 space-y-1 bg-slate-50/60 rounded-lg mt-1 mb-1">
+                    <Link
+                      href="/packages"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
+                    >
+                      Publishing Packages & Pricing
+                    </Link>
+                    <Link
+                      href="/author-guidelines"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Author Guidelines
+                    </Link>
+                    <Link
+                      href="/calculator"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Royalty Calculator
+                    </Link>
+                    <Link
+                      href="/download"
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                    >
+                      Author Downloads
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Direct Links */}
               <Link
-                href="/bookshelf"
+                href="/faq"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition text-sm font-semibold"
               >
-                <BookOpen className="w-4 h-4 text-slate-400" />
-                <span>Discover Books</span>
-              </Link>
-              <Link
-                href="/packages"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
-              >
-                <Package className="w-4 h-4 text-slate-400" />
-                <span>Publishing Packages</span>
-              </Link>
-              <Link
-                href="/author-guidelines"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
-              >
-                <FileText className="w-4 h-4 text-slate-400" />
-                <span>Author Guidelines</span>
-              </Link>
-              <Link
-                href="/calculator"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
-              >
-                <Calculator className="w-4 h-4 text-slate-400" />
-                <span>Royalty Calculator</span>
-              </Link>
-              <Link
-                href="/download"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
-              >
-                <Download className="w-4 h-4 text-slate-400" />
-                <span>Downloads</span>
+                <HelpCircle className="w-4 h-4 text-slate-400" />
+                <span>Frequently Asked Questions</span>
               </Link>
               <Link
                 href="/contact"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-rose-500 transition text-sm font-semibold"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition text-sm font-semibold"
               >
                 <PhoneCall className="w-4 h-4 text-slate-400" />
-                <span>Contact Us</span>
+                <span>Contact Editorial Office</span>
               </Link>
 
               <div className="pt-3 pb-1 border-t border-slate-100">

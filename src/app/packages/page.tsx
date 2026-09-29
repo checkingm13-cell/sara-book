@@ -1,14 +1,27 @@
-import Link from "next/link";
-import { ArrowLeft, Check, Sparkles, ShieldCheck, Globe, BookOpen, ChevronRight } from "lucide-react";
+"use client";
 
-export const metadata = {
-  title: "Publishing Packages & Pricing | Sara Book Publication",
-  description: "Transparent pricing packages for Indian and International academic book publishing with UGC-approved ISBN allocation.",
-};
+import React, { useState } from "react";
+import Link from "next/link";
+import { 
+  ArrowLeft, 
+  Check, 
+  Sparkles, 
+  ShieldCheck, 
+  Globe, 
+  BookOpen, 
+  ChevronRight,
+  HelpCircle,
+  Truck,
+  FileCheck,
+  Award
+} from "lucide-react";
 
 export default function PackagesPage() {
+  const [currency, setCurrency] = useState<"INR" | "USD">("INR");
+
   const tiers = [
     {
+      id: "bronze",
       name: "Bronze",
       priceInr: "₹5,999",
       priceUsd: "$100",
@@ -23,9 +36,10 @@ export default function PackagesPage() {
       copyright: "No",
       listing: "Sara Book Store",
       support: "Email",
-      highlight: "Ideal for student research monographs and initial dissertations.",
+      highlight: "Ideal for student research monographs and initial dissertation publication.",
     },
     {
+      id: "silver",
       name: "Silver",
       priceInr: "₹7,000",
       priceUsd: "$110",
@@ -39,15 +53,16 @@ export default function PackagesPage() {
       royalty: "Not Applicable",
       copyright: "No",
       listing: "Amazon, Flipkart, Sara Store",
-      support: "Email",
-      highlight: "Includes premier multi-platform eCommerce distribution.",
+      support: "Email Support",
+      highlight: "Includes premier multi-platform eCommerce distribution across India.",
     },
     {
+      id: "gold",
       name: "Gold",
       priceInr: "₹9,000",
       priceUsd: "$130",
       pages: "90 Pages",
-      badge: "Academic",
+      badge: "Faculty Choice",
       popular: true,
       copies: "3 Complimentary Copies",
       interior: "Black & White",
@@ -56,10 +71,11 @@ export default function PackagesPage() {
       royalty: "Not Applicable",
       copyright: "No",
       listing: "Amazon, Flipkart, Sara Store",
-      support: "Email & Phone Support",
-      highlight: "Most popular tier for university professors and college faculty.",
+      support: "Priority Phone & Email",
+      highlight: "Most selected plan for university faculty, PhD scholars, and UGC CAS score submissions.",
     },
     {
+      id: "diamond",
       name: "Diamond",
       priceInr: "₹12,000",
       priceUsd: "$300",
@@ -73,10 +89,11 @@ export default function PackagesPage() {
       royalty: "10% Royalty",
       copyright: "Official Registration",
       listing: "Amazon, Flipkart, Sara Store",
-      support: "Priority Phone & Dedicated Editor",
-      highlight: "Full copyright protection with sustained 10% royalty distribution.",
+      support: "Dedicated Editorial Lead",
+      highlight: "Full government copyright certification with guaranteed 10% author royalties.",
     },
     {
+      id: "platinum",
       name: "Platinum",
       priceInr: "₹18,000",
       priceUsd: "$400",
@@ -85,22 +102,38 @@ export default function PackagesPage() {
       popular: false,
       copies: "7 Complimentary Copies",
       interior: "100% Full Colour",
-      paper: "Glossy High-Definition Paper",
+      paper: "Glossy High-Definition",
       extraPageRate: "₹100 / $3",
       royalty: "15% Royalty",
       copyright: "Official Registration",
       listing: "Amazon, Flipkart, Sara Store",
       support: "VIP Dedicated Concierge",
-      highlight: "Flawless full-colour interior for medical atlases and architectural portfolios.",
+      highlight: "Flawless full-colour interior for medical atlases, dental photography & engineering portfolios.",
     },
+  ];
+
+  const featureMatrix = [
+    { feature: "13-Digit UGC-Valid ISBN", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Barcode Generation", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Custom Cover Artwork Design", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Interior InDesign Typesetting", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Digital Author PDF Proof", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Author Retains 100% Rights", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Sara Book Store Global Catalog", bronze: true, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Amazon & Flipkart Listing", bronze: false, silver: true, gold: true, diamond: true, platinum: true },
+    { feature: "Complimentary Author Copies", bronze: "0", silver: "1 Copy", gold: "3 Copies", diamond: "5 Copies", platinum: "7 Copies" },
+    { feature: "Government Copyright Registration", bronze: false, silver: false, gold: false, diamond: true, platinum: true },
+    { feature: "Ongoing Author Sales Royalty", bronze: "None", silver: "None", gold: "None", diamond: "10%", platinum: "15%" },
+    { feature: "Turnaround to Dispatch", bronze: "15 Days", silver: "15 Days", gold: "12 Days", diamond: "10 Days", platinum: "7 Days" },
   ];
 
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
+      
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+          1. HEADER BANNER
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
           <Link
             href="/"
@@ -109,16 +142,44 @@ export default function PackagesPage() {
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
           </Link>
 
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-              <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> Transparent Academic Publishing Plans
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
+                <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> UGC-CARE & NAAC Valid Academic Plans
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
+                Publishing Packages & Pricing
+              </h1>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                All-inclusive academic book publication with authentic 13-digit ISBN allocation, professional InDesign typesetting, custom cover design, and fast guaranteed courier delivery.
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
-              Publication Packages & Pricing
-            </h1>
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Every plan guarantees a verified 13-digit UGC-valid ISBN, professional InDesign typesetting, custom cover artwork, and rapid 15-day worldwide distribution.
-            </p>
+
+            {/* Currency Switcher */}
+            <div className="bg-white/10 p-1 rounded-xl border border-white/15 flex items-center shrink-0 self-start md:self-auto">
+              <button
+                type="button"
+                onClick={() => setCurrency("INR")}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  currency === "INR"
+                    ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
+                    : "text-slate-300 hover:text-white"
+                }`}
+              >
+                ₹ INR (India)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrency("USD")}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  currency === "USD"
+                    ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
+                    : "text-slate-300 hover:text-white"
+                }`}
+              >
+                $ USD (International)
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -126,28 +187,20 @@ export default function PackagesPage() {
       {/* ─────────────────────────────────────────────────────────────
           2. PRICING CARDS
          ───────────────────────────────────────────────────────────── */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl sm:text-3xl font-black text-[#0D3B66] tracking-tight uppercase">
-            Choose Your Publishing Plan
-          </h2>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
-            Zero hidden royalties. Full copyright retention. 100% compliant with UGC CAS point guidelines.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 mb-14 items-stretch">
-          {tiers.map((t, idx) => (
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 mb-16 items-stretch">
+          {tiers.map((t) => (
             <div
-              key={idx}
+              key={t.id}
               className={`flex flex-col justify-between rounded-2xl transition-all duration-200 p-6 relative ${
                 t.popular
-                  ? "bg-[#0A1628] text-white shadow-xl ring-2 ring-[#FFAE00] -translate-y-1"
-                  : "bg-white text-slate-800 border border-slate-200 hover:border-slate-300 hover:shadow-md"
+                  ? "bg-[#0A1628] text-white shadow-2xl ring-2 ring-[#FFAE00] lg:-translate-y-2"
+                  : "bg-white text-slate-800 border border-slate-200 hover:border-slate-300 hover:shadow-lg"
               }`}
             >
               {t.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#FFAE00] text-[#0A1628] text-[10px] font-mono font-black tracking-widest uppercase rounded-full shadow-md flex items-center gap-1">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#FFAE00] text-[#0A1628] text-[10px] font-mono font-black tracking-widest uppercase rounded-full shadow-md flex items-center gap-1 whitespace-nowrap">
                   <Sparkles className="w-3 h-3 fill-current" /> Most Popular
                 </div>
               )}
@@ -170,12 +223,12 @@ export default function PackagesPage() {
                   <div className={`text-3xl font-black tracking-tight ${
                     t.popular ? "text-white" : "text-[#0D3B66]"
                   }`}>
-                    {t.priceInr}
+                    {currency === "INR" ? t.priceInr : t.priceUsd}
                   </div>
                   <div className={`text-[11px] font-mono mt-0.5 ${
                     t.popular ? "text-slate-300" : "text-slate-500"
                   }`}>
-                    Global Price: <strong className={t.popular ? "text-white font-bold" : "text-slate-700"}>{t.priceUsd}</strong>
+                    {currency === "INR" ? `USD: ${t.priceUsd}` : `INR: ${t.priceInr}`} • No hidden fees
                   </div>
                 </div>
 
@@ -205,14 +258,14 @@ export default function PackagesPage() {
                     <span className={t.popular ? "text-slate-200" : "text-slate-700"}>{t.paper}</span>
                   </div>
                   <div className="flex items-center justify-between">
+                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Extra Page:</span>
+                    <span className={`font-mono ${t.popular ? "text-slate-200" : "text-slate-700"}`}>{t.extraPageRate}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
                     <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Royalty:</span>
                     <strong className={t.royalty !== "Not Applicable" ? "text-emerald-400 font-bold" : (t.popular ? "text-slate-400" : "text-slate-500")}>
                       {t.royalty}
                     </strong>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className={t.popular ? "text-slate-400" : "text-slate-500"}>Extra Page:</span>
-                    <span className={`font-mono ${t.popular ? "text-slate-200" : "text-slate-700"}`}>{t.extraPageRate}</span>
                   </div>
                 </div>
               </div>
@@ -221,7 +274,7 @@ export default function PackagesPage() {
                 t.popular ? "border-white/10" : "border-slate-100"
               }`}>
                 <Link
-                  href={`/publish?plan=${t.name.toLowerCase()}`}
+                  href={`/publish?plan=${t.id}`}
                   className={`w-full block text-center py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
                     t.popular
                       ? "bg-[#FFAE00] hover:bg-[#e69d00] text-[#0A1628] shadow-md font-black"
@@ -235,57 +288,109 @@ export default function PackagesPage() {
           ))}
         </div>
 
-        {/* Feature Comparison Table */}
-        <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-          <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#0D3B66] mb-6 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-600" />
-            Standard Inclusions in Every Sara Book Publication Package
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">UGC Valid 13-Digit ISBN</h4>
-                <p className="text-xs text-slate-500 mt-1">Officially alloted with barcode for UGC Career Advancement (CAS) points.</p>
-              </div>
+        {/* ─────────────────────────────────────────────────────────────
+            3. FEATURE COMPARISON MATRIX
+           ───────────────────────────────────────────────────────────── */}
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs mb-16">
+          <div className="p-6 sm:p-8 bg-slate-50 border-b border-slate-200">
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#0D3B66]">
+              Detailed Feature Comparison Matrix
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm mt-1">
+              Every plan complies with the UGC Minimum Qualifications for Appointment of Teachers and Other Academic Staff.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="border-b border-slate-200 bg-white">
+                  <th className="p-4 sm:p-5 font-bold text-slate-900 w-1/3">Included Feature</th>
+                  <th className="p-4 sm:p-5 font-bold text-slate-800 text-center">Bronze</th>
+                  <th className="p-4 sm:p-5 font-bold text-slate-800 text-center">Silver</th>
+                  <th className="p-4 sm:p-5 font-bold text-[#1658b3] text-center bg-blue-50/50">Gold</th>
+                  <th className="p-4 sm:p-5 font-bold text-slate-800 text-center">Diamond</th>
+                  <th className="p-4 sm:p-5 font-bold text-slate-800 text-center">Platinum</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {featureMatrix.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                    <td className="p-4 sm:p-5 font-medium text-slate-800">{row.feature}</td>
+                    
+                    <td className="p-4 sm:p-5 text-center">
+                      {typeof row.bronze === "boolean" ? (
+                        row.bronze ? <Check className="w-4 h-4 text-emerald-600 mx-auto" /> : <span className="text-slate-300">—</span>
+                      ) : (
+                        <span className="font-mono text-slate-700">{row.bronze}</span>
+                      )}
+                    </td>
+
+                    <td className="p-4 sm:p-5 text-center">
+                      {typeof row.silver === "boolean" ? (
+                        row.silver ? <Check className="w-4 h-4 text-emerald-600 mx-auto" /> : <span className="text-slate-300">—</span>
+                      ) : (
+                        <span className="font-mono text-slate-700">{row.silver}</span>
+                      )}
+                    </td>
+
+                    <td className="p-4 sm:p-5 text-center bg-blue-50/30">
+                      {typeof row.gold === "boolean" ? (
+                        row.gold ? <Check className="w-4 h-4 text-emerald-600 mx-auto" /> : <span className="text-slate-300">—</span>
+                      ) : (
+                        <span className="font-mono font-bold text-[#1658b3]">{row.gold}</span>
+                      )}
+                    </td>
+
+                    <td className="p-4 sm:p-5 text-center">
+                      {typeof row.diamond === "boolean" ? (
+                        row.diamond ? <Check className="w-4 h-4 text-emerald-600 mx-auto" /> : <span className="text-slate-300">—</span>
+                      ) : (
+                        <span className="font-mono text-slate-700">{row.diamond}</span>
+                      )}
+                    </td>
+
+                    <td className="p-4 sm:p-5 text-center">
+                      {typeof row.platinum === "boolean" ? (
+                        row.platinum ? <Check className="w-4 h-4 text-emerald-600 mx-auto" /> : <span className="text-slate-300">—</span>
+                      ) : (
+                        <span className="font-mono font-bold text-slate-900">{row.platinum}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            4. GUARANTEE STRIP
+           ───────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 sm:p-8 bg-[#0A1628] rounded-2xl text-white">
+          <div className="flex items-start gap-3.5">
+            <Award className="w-6 h-6 text-[#FFAE00] shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider">CAS Score Guaranteed</h4>
+              <p className="text-xs text-slate-300 mt-1">Official certificate of ISBN allotment issued for NAAC & UGC Career Advancement Scheme.</p>
             </div>
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">Custom Cover Artwork Design</h4>
-                <p className="text-xs text-slate-500 mt-1">Full-colour high-gloss or matte laminate cover designed by professional artists.</p>
-              </div>
+          </div>
+          <div className="flex items-start gap-3.5">
+            <Globe className="w-6 h-6 text-[#FFAE00] shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider">Global Distribution</h4>
+              <p className="text-xs text-slate-300 mt-1">Direct listing on Amazon, Flipkart, and Sara Book Store with worldwide courier dispatch.</p>
             </div>
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">Digital Author Proof (Softcopy)</h4>
-                <p className="text-xs text-slate-500 mt-1">Complete PDF draft provided for final author verification before mechanical printing.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">Global Multi-Platform Listing</h4>
-                <p className="text-xs text-slate-500 mt-1">Listed on Amazon, Flipkart, and the Sara Book Store catalog for worldwide order fulfillment.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">Author Retains 100% Rights</h4>
-                <p className="text-xs text-slate-500 mt-1">Authors retain complete non-exclusive intellectual property and reprint privileges.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase">15-Day Guaranteed Delivery</h4>
-                <p className="text-xs text-slate-500 mt-1">Expedited end-to-end turnaround from initial manuscript approval to courier dispatch.</p>
-              </div>
+          </div>
+          <div className="flex items-start gap-3.5">
+            <Truck className="w-6 h-6 text-[#FFAE00] shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider">Express Turnaround</h4>
+              <p className="text-xs text-slate-300 mt-1">Standard 7–15 days from final author draft sign-off to doorstep delivery.</p>
             </div>
           </div>
         </div>
+
       </main>
     </div>
   );

@@ -1,53 +1,108 @@
-import Link from "next/link";
-import { ArrowLeft, Download, FileText, Shield, FileCheck, CheckCircle2 } from "lucide-react";
+"use client";
 
-export const metadata = {
-  title: "Author Downloads & Legal Agreements | Sara Book Publication",
-  description: "Official downloadable publishing agreement templates, copyright assignment declarations, manuscript submission templates, and author checklists.",
-};
+import React, { useState } from "react";
+import Link from "next/link";
+import { 
+  ArrowLeft, 
+  Download, 
+  FileText, 
+  CheckCircle2, 
+  ShieldCheck, 
+  FileCode, 
+  FileArchive, 
+  Search,
+  ExternalLink,
+  MessageCircle,
+  Phone
+} from "lucide-react";
 
 export default function DownloadPage() {
-  const documents = [
+  const [activeTab, setActiveTab] = useState<"all" | "template" | "legal" | "guideline">("all");
+  const [search, setSearch] = useState("");
+
+  const resources = [
     {
-      title: "Author Publishing Agreement (MOU)",
-      category: "Legal Contract",
-      format: "PDF Document",
-      size: "184 KB",
-      desc: "Standard copyright non-exclusive publishing memorandum of understanding between the primary author and Sara Book Publication.",
-      filename: "Sara_Author_Publishing_Agreement.pdf",
+      id: "doc-1",
+      title: "Standard Academic Book Manuscript Template",
+      category: "template",
+      categoryLabel: "Manuscript Template",
+      format: "DOCX",
+      size: "245 KB",
+      updated: "2026 Revision",
+      description: "Pre-formatted Microsoft Word template with automated chapter styling, running heads, and standard 1-inch margins.",
+      downloadUrl: "#download-template-docx",
     },
     {
-      title: "Manuscript Template (APA 7th Standard)",
-      category: "Preparation Template",
-      format: "DOCX File",
-      size: "92 KB",
-      desc: "Pre-formatted Microsoft Word template with correct 1.5 margins, 12pt typography, header hierarchy, and APA bibliographic formatting.",
-      filename: "Sara_Manuscript_Format_Template.docx",
+      id: "doc-2",
+      title: "Edited Book Chapter Contribution Template",
+      category: "template",
+      categoryLabel: "Manuscript Template",
+      format: "DOCX",
+      size: "180 KB",
+      updated: "2026 Revision",
+      description: "Standard layout for contributing authors submitting individual research chapters for edited anthologies.",
+      downloadUrl: "#download-chapter-docx",
     },
     {
-      title: "Copyright & Plagiarism Assignment Form",
-      category: "Compliance",
-      format: "PDF Document",
-      size: "142 KB",
-      desc: "Author self-declaration verifying manuscript originality, lack of copyright infringement, and absence of undisclosed AI synthesis.",
-      filename: "Copyright_Declaration_Form.pdf",
+      id: "doc-3",
+      title: "Author Publishing Agreement & Copyright Transfer",
+      category: "legal",
+      categoryLabel: "Legal & Copyright",
+      format: "PDF",
+      size: "420 KB",
+      updated: "UGC Valid Form",
+      description: "Official non-exclusive publication agreement outlining author intellectual property retention, ISBN allocation, and royalty terms.",
+      downloadUrl: "#download-agreement-pdf",
     },
     {
-      title: "Author Guidelines & Style Manual",
-      category: "Documentation",
-      format: "PDF Document",
-      size: "320 KB",
-      desc: "Complete 2026 handbook covering proofreading symbols, figure numbering, citation protocols, and post-publication sales royalty ledger.",
-      filename: "Sara_Author_Guidelines_Manual_2026.pdf",
+      id: "doc-4",
+      title: "Plagiarism & Originality Declaration Form",
+      category: "legal",
+      categoryLabel: "Legal & Copyright",
+      format: "PDF",
+      size: "155 KB",
+      updated: "Mandatory",
+      description: "Author self-declaration certificate verifying that the submitted work contains no unauthorized or unattributed intellectual materials.",
+      downloadUrl: "#download-plagiarism-pdf",
+    },
+    {
+      id: "doc-5",
+      title: "Complete Scholarly Author Publishing Handbook",
+      category: "guideline",
+      categoryLabel: "Style Guides",
+      format: "PDF",
+      size: "1.2 MB",
+      updated: "Full Edition",
+      description: "Comprehensive 28-page PDF guide covering reference styles (APA, MLA, IEEE), InDesign book anatomy, and peer-review policies.",
+      downloadUrl: "#download-handbook-pdf",
+    },
+    {
+      id: "doc-6",
+      title: "UGC CAS Points & API Calculation Reference Guide",
+      category: "guideline",
+      categoryLabel: "Style Guides",
+      format: "PDF",
+      size: "340 KB",
+      updated: "UGC Reg. 2018",
+      description: "Summary sheet explaining Category 3 API scoring points for textbooks, edited works, and monographs under University Grants Commission rules.",
+      downloadUrl: "#download-api-guide-pdf",
     },
   ];
 
+  const filteredResources = resources.filter((item) => {
+    const matchesTab = activeTab === "all" || item.category === activeTab;
+    const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase()) || 
+                          item.description.toLowerCase().includes(search.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
+
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
+      
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+          1. HEADER BANNER
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
           <Link
             href="/"
@@ -58,71 +113,166 @@ export default function DownloadPage() {
 
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-              <Download className="w-3 h-3 text-[#FFAE00]" /> Author Resource Hub
+              <Download className="w-3 h-3 text-[#FFAE00]" /> Author Resource & Manuscript Downloads
             </div>
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
-              Author Downloads & Official Templates
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
+              Author Resource Downloads
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Download verified legal templates, manuscript styling formats, and copyright declarations directly to prepare your submission.
+              Official MS Word templates, copyright declarations, publication agreements, and UGC API reference documents ready for immediate download.
             </p>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. DOWNLOADS LIST
+          2. FILTERS AND RESOURCE CARDS
          ───────────────────────────────────────────────────────────── */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="space-y-4 mb-12">
-          {documents.map((doc, idx) => (
-            <div
-              key={idx}
-              className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 shadow-xs hover:border-slate-300 transition-all"
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+        
+        {/* Search & Category Filter Row */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-200 pb-6 mb-8">
+          
+          {/* Tab Filter */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab("all")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                activeTab === "all"
+                  ? "bg-[#1658b3] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              }`}
             >
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-[#1658b3]">
-                  <FileText className="w-5 h-5 text-[#1658b3]" />
+              All Files ({resources.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("template")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                activeTab === "template"
+                  ? "bg-[#1658b3] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              }`}
+            >
+              Word Templates
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("legal")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                activeTab === "legal"
+                  ? "bg-[#1658b3] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              }`}
+            >
+              Legal & Copyright
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("guideline")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                activeTab === "guideline"
+                  ? "bg-[#1658b3] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              }`}
+            >
+              Style Guides
+            </button>
+          </div>
+
+          {/* Search Box */}
+          <div className="relative w-full md:w-72">
+            <input
+              type="text"
+              placeholder="Search forms & templates..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full h-10 pl-9 pr-3 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#1658b3] focus:bg-white transition"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+          </div>
+        </div>
+
+        {/* Resources Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {filteredResources.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:border-slate-300 hover:shadow-md transition-all group"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-black uppercase tracking-wider ${
+                    item.format === "DOCX" 
+                      ? "bg-blue-100 text-blue-800" 
+                      : "bg-rose-100 text-rose-800"
+                  }`}>
+                    {item.format}
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    {item.size} • {item.updated}
+                  </span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono px-2 py-0.5 bg-blue-50 text-[#1658b3] rounded-md uppercase font-semibold">
-                      {doc.category}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      {doc.format} &bull; {doc.size}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold text-[#0D3B66] mb-1">{doc.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed max-w-xl">{doc.desc}</p>
-                </div>
+
+                <h3 className="font-bold text-base text-[#0D3B66] group-hover:text-[#1658b3] transition-colors leading-snug mb-2">
+                  {item.title}
+                </h3>
+
+                <p className="text-xs text-slate-500 leading-relaxed mb-6">
+                  {item.description}
+                </p>
               </div>
 
-              <div className="shrink-0">
-                <a
-                  href={`#${doc.filename}`}
-                  download={doc.filename}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1658b3] hover:bg-[#124690] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-slate-400 font-semibold uppercase">
+                  {item.categoryLabel}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => alert(`Starting download for: ${item.title}`)}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0A1628] hover:bg-[#1658b3] text-white rounded-lg text-xs font-bold transition shadow-xs cursor-pointer"
                 >
-                  <Download className="w-3.5 h-3.5 text-[#FFAE00]" /> Download
-                </a>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download</span>
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Instructions Callout */}
-        <div className="bg-slate-50 rounded-xl border border-slate-200 p-6 sm:p-8">
-          <h2 className="text-sm font-bold text-[#0D3B66] uppercase tracking-wider mb-3 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-            Instructions for Submitting Forms
-          </h2>
-          <ol className="list-decimal list-inside text-xs text-slate-600 space-y-2 leading-relaxed">
-            <li>Download the <strong>Manuscript Template (.docx)</strong> and paste your unformatted chapter draft into the respective sections.</li>
-            <li>Fill out and sign the <strong>Author Publishing Agreement</strong> and scan/export as PDF.</li>
-            <li>Submit both documents simultaneously via our <Link href="/publish" className="text-[#1658b3] font-bold hover:underline">Online Submission Portal</Link> or email to <a href="mailto:editor@sarapublication.com" className="text-[#0D3B66] font-bold font-mono">editor@sarapublication.com</a>.</li>
-          </ol>
+        {/* Contact Help Strip */}
+        <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-base font-bold text-[#0D3B66] uppercase">
+              Need Assistance with Manuscript Preparation?
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              Our academic editorial coordinators can assist with InDesign formatting, citation structuring, or ISBN eligibility queries.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href="https://wa.me/918866003636?text=Hello%20Sara%20Book%20Publication"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition shadow-xs"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>WhatsApp Desk</span>
+            </a>
+            <a
+              href="tel:+918866003636"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-bold transition shadow-xs"
+            >
+              <Phone className="w-3.5 h-3.5 text-slate-400" />
+              <span>+91-8866003636</span>
+            </a>
+          </div>
         </div>
+
       </main>
     </div>
   );

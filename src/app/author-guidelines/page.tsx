@@ -1,53 +1,64 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, FileText, Sparkles, BookOpen, AlertCircle, ChevronRight, Mail, Phone } from "lucide-react";
+import { 
+  ArrowLeft, 
+  FileText, 
+  CheckCircle2, 
+  ShieldCheck, 
+  Download, 
+  BookOpen, 
+  Award, 
+  ExternalLink,
+  ChevronRight,
+  BookmarkCheck,
+  AlertCircle
+} from "lucide-react";
 
-export const metadata = {
-  title: "Author Guidelines | Sara Book Publication",
-  description: "Official manuscript formatting, style guide, ISBN allocation, and publishing process for academic authors.",
-};
+export default function AuthorGuidelinesPage() {
+  const [activeSection, setActiveSection] = useState("preparation");
 
-export default function GuidelinesPage() {
-  const requirements = [
-    {
-      title: "Manuscript Format & Dimensions",
-      desc: "All manuscripts must be prepared in Microsoft Word (.doc / .docx) format in A4 paper size. Maintain 1.5 line spacing with at least 1-inch (2.54 cm) margins on all sides. Font size must be 12pt (Times New Roman or Calibri recommended).",
-    },
-    {
-      title: "File Submission Policy",
-      desc: "Submit a single, consolidated Word file that includes the title page, author biography & affiliations, abstract, full chapters, figures, tables, and APA reference list. Password-protected files cannot be processed.",
-    },
-    {
-      title: "Supported Languages",
-      desc: "Sara Book Publication accepts and publishes works in English, Gujarati, and Hindi. Multilingual scholarly dictionaries or glossaries are welcomed with editorial review.",
-    },
-    {
-      title: "Tables & Embedded Figures",
-      desc: "All images, charts, and diagrams must be embedded directly within the Word document with high clarity (minimum 300 DPI for print viability). Number all figures and tables sequentially (e.g., Table 1, Figure 2).",
-    },
-    {
-      title: "References & Citations (APA Style)",
-      desc: "All scholarly references must follow standard American Psychological Association (APA 7th Edition) format. In-text citations should match the bibliography at the end of the monograph.",
-    },
-    {
-      title: "UGC-Approved ISBN Allocation",
-      desc: "Every published edition and reprint receives an authentic 13-digit International Standard Book Number (ISBN) valid for UGC Career Advancement Scheme (CAS) and academic performance indicators (API).",
-    },
+  const sections = [
+    { id: "preparation", title: "1. Manuscript Preparation" },
+    { id: "isbn", title: "2. UGC & CAS ISBN Compliance" },
+    { id: "indesign", title: "3. Typesetting & Layout Specs" },
+    { id: "peer-review", title: "4. Peer Review Lifecycle" },
+    { id: "copyright", title: "5. Intellectual Property & Royalty" },
   ];
 
-  const workflowSteps = [
-    { step: "01", title: "Manuscript Submission", time: "Day 1", desc: "Upload your completed Word manuscript via our web portal or email editor@sarapublication.com." },
-    { step: "02", title: "Editorial Assessment", time: "2-3 Days", desc: "Our editorial board reviews academic rigor, structural viability, and formatting compliance." },
-    { step: "03", title: "ISBN & Legal Registration", time: "3 Working Days", desc: "13-digit ISBN is registered with UGC compliance and author contract executed." },
-    { step: "04", title: "Typesetting & Proofing", time: "5-7 Days", desc: "InDesign layout formatting, bespoke cover design, and author digital proof review." },
-    { step: "05", title: "Global Release & Distribution", time: "15 Days Total", desc: "Paperback printing, eCommerce cataloging (Amazon, Flipkart, Sara Store), and complimentary copies dispatch." },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 140;
+      for (const s of sections) {
+        const el = document.getElementById(s.id);
+        if (el && el.offsetTop <= scrollPos && el.offsetTop + el.offsetHeight > scrollPos) {
+          setActiveSection(s.id);
+          break;
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      window.scrollTo({
+        top: el.offsetTop - 100,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
+      
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Consistent Navy #0A1628 Theme)
+          1. HEADER BANNER
          ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#0A1628] text-white py-10 sm:py-14 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-[#0A1628] text-white py-12 sm:py-16 border-b border-white/10 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
           <Link
             href="/"
@@ -56,150 +67,250 @@ export default function GuidelinesPage() {
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
           </Link>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-                <CheckCircle2 className="w-3 h-3 text-[#FFAE00]" /> Editorial Standards & Guidelines
-              </div>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2">
-                Author Guidelines & Publication Process
-              </h1>
-              <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
-                Step-by-step instructions on manuscript formatting, APA reference structures, ISBN allocation, and peer review schedules.
-              </p>
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1658b3]/30 text-sky-300 border border-sky-400/20 text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
+              <ShieldCheck className="w-3 h-3 text-[#FFAE00]" /> Official Editorial Handbook & Criteria
             </div>
-
-            <Link
-              href="/publish"
-              className="inline-flex items-center justify-center gap-2 bg-[#1658b3] hover:bg-[#124690] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-lg transition shadow-sm hover:shadow"
-            >
-              Submit Manuscript Online <ChevronRight className="w-4 h-4 text-[#FFAE00]" />
-            </Link>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
+              Author Guidelines & Publishing Standards
+            </h1>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Comprehensive guidelines for submitting monographs, textbooks, edited volumes, and conference proceedings conforming to UGC API Career Advancement norms.
+            </p>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. MAIN CONTENT LAYOUT
+          2. MAIN CONTENT WITH STICKY TABLE OF CONTENTS
          ───────────────────────────────────────────────────────────── */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Main Column (8 cols) */}
-          <div className="lg:col-span-8 space-y-8">
+          {/* LEFT: STICKY TABLE OF CONTENTS (4 cols) */}
+          <aside className="lg:col-span-4 sticky top-24 space-y-6">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-xs">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-3">
+                TABLE OF CONTENTS
+              </span>
+              <nav className="space-y-1">
+                {sections.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => scrollTo(s.id)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-between cursor-pointer ${
+                      activeSection === s.id
+                        ? "bg-[#1658b3] text-white shadow-xs"
+                        : "text-slate-700 hover:bg-slate-200/60"
+                    }`}
+                  >
+                    <span>{s.title}</span>
+                    <ChevronRight className={`w-3.5 h-3.5 transition-transform ${activeSection === s.id ? "rotate-90 text-white" : "text-slate-400"}`} />
+                  </button>
+                ))}
+              </nav>
+
+              <div className="pt-4 mt-5 border-t border-slate-200">
+                <Link
+                  href="/download"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-white border border-slate-200 hover:border-slate-300 rounded-xl text-xs font-bold text-slate-800 transition shadow-2xs"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#1658b3]" />
+                  <span>Download MS Word Template</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Quick Support Badge */}
+            <div className="bg-[#0A1628] text-white p-5 rounded-2xl">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFAE00] font-bold block mb-1">
+                EDITORIAL HELPDESK
+              </span>
+              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                Have questions regarding manuscript eligibility or citation conventions?
+              </p>
+              <a
+                href="mailto:contact@sarapublication.com"
+                className="text-xs font-bold text-[#FFAE00] hover:underline"
+              >
+                contact@sarapublication.com →
+              </a>
+            </div>
+          </aside>
+
+          {/* RIGHT: RICH DOCUMENT BODY (8 cols) */}
+          <div className="lg:col-span-8 space-y-12">
             
-            {/* Editorial Vision */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#0D3B66] mb-3 pb-3 border-b border-slate-100 flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#1658b3]" />
-                Editorial Vision & Academic Rigor
-              </h2>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
-                Since our founding in <strong>2011</strong> in Ahmedabad, Sara Book Publication (SBP) has provided an egalitarian, rigorous platform for university faculty, doctoral researchers, and scholars across India and abroad.
-              </p>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                We accept original monographs, textbooks, conference proceedings, and reference manuals. All manuscripts receive professional proof-layout, 13-digit UGC-valid ISBN allocation, and worldwide distribution.
-              </p>
-            </div>
-
-            {/* Manuscript Formatting Style Guide */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#0D3B66] mb-5 pb-3 border-b border-slate-100 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#1658b3]" />
-                Manuscript Formatting & Style Guide
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {requirements.map((item, idx) => (
-                  <div key={idx} className="border border-slate-100 bg-slate-50/70 p-4 rounded-lg">
-                    <h3 className="text-xs sm:text-sm font-bold text-[#0D3B66] mb-1.5 flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
+            {/* Section 1: Preparation */}
+            <section id="preparation" className="scroll-mt-28 space-y-4">
+              <div className="border-b border-slate-200 pb-3">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#1658b3] font-bold">
+                  Chapter I
+                </span>
+                <h2 className="text-2xl font-black text-[#0D3B66] tracking-tight">
+                  Manuscript Preparation & Formatting
+                </h2>
               </div>
-            </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Authors must submit their complete manuscripts in Microsoft Word format (.docx or .doc). All text, tables, illustrations, equations, and references must be incorporated in a single master document.
+              </p>
 
-            {/* 15-Day Timeline */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#0D3B66] mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#FFAE00]" />
-                Expedited 15-Day Publication Workflow
-              </h2>
-              <div className="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-6">
-                {workflowSteps.map((w, idx) => (
-                  <div key={idx} className="relative">
-                    <span className="absolute -left-[35px] top-0 w-7 h-7 rounded-full bg-[#0D3B66] text-white font-mono text-[11px] flex items-center justify-center font-bold">
-                      {w.step}
-                    </span>
-                    <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-bold text-slate-900 text-sm">{w.title}</h3>
-                      <span className="text-[10px] font-mono px-2 py-0.5 bg-blue-50 text-[#1658b3] rounded-full border border-blue-200/60 font-semibold">
-                        {w.time}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-600 leading-relaxed">{w.desc}</p>
-                  </div>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                  <h4 className="font-bold text-xs text-slate-900 uppercase mb-2">Typography & Sizing</h4>
+                  <ul className="text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+                    <li>Main body text: Times New Roman, 12pt, 1.5 line spacing.</li>
+                    <li>Primary headings: 14pt, Bold, Title Case.</li>
+                    <li>Secondary subheadings: 12pt, Bold.</li>
+                    <li>Page margins: 1 inch (2.54 cm) on all 4 borders.</li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                  <h4 className="font-bold text-xs text-slate-900 uppercase mb-2">Reference Styles Accepted</h4>
+                  <ul className="text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+                    <li><strong>APA 7th Edition:</strong> For Social Sciences & Management.</li>
+                    <li><strong>IEEE / Vancouver:</strong> For Engineering, IT & Medicine.</li>
+                    <li><strong>MLA 9th Edition:</strong> For Literature and Arts.</li>
+                    <li>Authors must ensure uniform citation style throughout.</li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            </section>
+
+            {/* Section 2: ISBN & CAS */}
+            <section id="isbn" className="scroll-mt-28 space-y-4">
+              <div className="border-b border-slate-200 pb-3">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#1658b3] font-bold">
+                  Chapter II
+                </span>
+                <h2 className="text-2xl font-black text-[#0D3B66] tracking-tight">
+                  UGC & CAS ISBN Compliance
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Sara Book Publication is an officially registered publisher with the Raja Rammohun Roy National Agency for ISBN (Ministry of Education, Govt. of India).
+              </p>
+
+              <div className="bg-blue-50/60 border border-blue-200 rounded-2xl p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#1658b3] uppercase tracking-wide">
+                  <Award className="w-4 h-4 text-[#FFAE00]" /> Career Advancement Scheme (CAS) Points
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Publications with authentic 13-digit ISBNs qualify for Academic Performance Indicators (API) under Category 3(e) of UGC Regulations. A single-authored textbook or reference monograph yields up to <strong>10 to 12 API points</strong> upon evaluation by university screening committees.
+                </p>
+              </div>
+            </section>
+
+            {/* Section 3: InDesign */}
+            <section id="indesign" className="scroll-mt-28 space-y-4">
+              <div className="border-b border-slate-200 pb-3">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#1658b3] font-bold">
+                  Chapter III
+                </span>
+                <h2 className="text-2xl font-black text-[#0D3B66] tracking-tight">
+                  Typesetting & Layout Specifications
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Once approved, all manuscripts enter our Adobe InDesign workflow where font kerning, pagination, running headers, and table styling are mechanically calibrated to world-standard press book formats.
+              </p>
+
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
+                <div className="flex items-center justify-between text-xs border-b border-slate-200 pb-2">
+                  <span className="text-slate-500">Standard Academic Trim Size:</span>
+                  <strong className="text-slate-900 font-mono">Crown Quarto (7.25" × 9.5") or Royal 8vo</strong>
+                </div>
+                <div className="flex items-center justify-between text-xs border-b border-slate-200 pb-2">
+                  <span className="text-slate-500">Standard Paper Quality:</span>
+                  <strong className="text-slate-900">70 GSM Natural Shade Bookprint</strong>
+                </div>
+                <div className="flex items-center justify-between text-xs border-b border-slate-200 pb-2">
+                  <span className="text-slate-500">Lamination Finish:</span>
+                  <strong className="text-slate-900">Thermal Velvet Matte or Gloss Lamination</strong>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-500">Soft Proof Draft:</span>
+                  <strong className="text-emerald-700 font-bold">High-Resolution PDF provided for sign-off</strong>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Peer Review */}
+            <section id="peer-review" className="scroll-mt-28 space-y-4">
+              <div className="border-b border-slate-200 pb-3">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#1658b3] font-bold">
+                  Chapter IV
+                </span>
+                <h2 className="text-2xl font-black text-[#0D3B66] tracking-tight">
+                  Double-Blind Peer Review Lifecycle
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                To maintain the highest scholarly integrity, every manuscript is examined by our subject-matter editorial board following a rigorous 4-step sequence:
+              </p>
+
+              <div className="space-y-3 pt-1">
+                <div className="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 bg-white">
+                  <span className="w-6 h-6 rounded-full bg-[#1658b3] text-white flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase">Initial Plagiarism Screening</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Similarity index verified using Turnitin/iThenticate. Must remain strictly under 15% overall.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 bg-white">
+                  <span className="w-6 h-6 rounded-full bg-[#1658b3] text-white flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase">Subject Expert Appraisal</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Two peer reviewers independently inspect chapter coherence, research methodology, and factual citations.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 bg-white">
+                  <span className="w-6 h-6 rounded-full bg-[#1658b3] text-white flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase">Author Revision & Formatting Proof</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Reviewer feedback dispatched to authors for minor revisions, followed by draft PDF typesetting sign-off.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 bg-white">
+                  <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">4</span>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase">Printing & Nationwide Distribution</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">ISBN allocated, legal deposit sent, and book activated on Amazon, Flipkart, and Sara Book Store.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 5: Copyright & Royalty */}
+            <section id="copyright" className="scroll-mt-28 space-y-4">
+              <div className="border-b border-slate-200 pb-3">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#1658b3] font-bold">
+                  Chapter V
+                </span>
+                <h2 className="text-2xl font-black text-[#0D3B66] tracking-tight">
+                  Intellectual Property, Copyright & Royalties
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Sara Book Publication operates on an author-empowered non-exclusive model. Authors retain full copyright over their intellectual work, and may produce translated versions or revised future editions freely.
+              </p>
+
+              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 uppercase tracking-wide mb-1">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Transparent Monthly Royalty Payouts
+                </div>
+                <p className="text-xs text-emerald-950 leading-relaxed">
+                  Earn up to <strong>15% royalty</strong> on every book copy sold across Amazon, Flipkart, and institutional library distributors with zero maintenance fees. Detailed sales statements are sent every quarter directly to your registered author portal.
+                </p>
+              </div>
+            </section>
+
           </div>
 
-          {/* Sidebar (4 cols) */}
-          <div className="lg:col-span-4 space-y-6">
-            
-            {/* Quick Submission Card */}
-            <div className="bg-[#0A1628] text-white p-6 rounded-xl border border-white/10 shadow-sm">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-[#FFAE00] font-bold mb-2">
-                EDITORIAL DESK
-              </div>
-              <h3 className="text-base font-bold mb-2 text-white">Direct Editorial Submission</h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-5">
-                Transmit your complete draft manuscript (.doc / .docx) to our editorial board in Ahmedabad for preliminary evaluation.
-              </p>
-              
-              <div className="space-y-2.5 mb-5 text-xs">
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-[10px] uppercase font-mono text-slate-400">Chief Editor Email</div>
-                  <a href="mailto:editor@sarapublication.com" className="font-mono font-bold text-sky-300 hover:text-white flex items-center gap-1.5 mt-0.5">
-                    <Mail className="w-3.5 h-3.5 text-[#FFAE00]" /> editor@sarapublication.com
-                  </a>
-                </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-[10px] uppercase font-mono text-slate-400">Direct Helpline</div>
-                  <a href="tel:+918866003636" className="font-mono font-bold text-sky-300 hover:text-white flex items-center gap-1.5 mt-0.5">
-                    <Phone className="w-3.5 h-3.5 text-[#FFAE00]" /> +91 88 66 00 3636
-                  </a>
-                </div>
-              </div>
-
-              <Link
-                href="/publish"
-                className="w-full block text-center py-3 bg-[#1658b3] hover:bg-[#124690] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition"
-              >
-                Go to Upload Form
-              </Link>
-            </div>
-
-            {/* Intellectual Rights Card */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
-              <h3 className="text-xs font-bold text-[#0D3B66] uppercase tracking-wider mb-2 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-[#FFAE00]" />
-                Author Rights & Royalties
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                Authors retain 100% intellectual copyright. Eligible publishing plans receive up to <strong>15% bi-annual royalties</strong> on physical book sales.
-              </p>
-              <Link
-                href="/packages"
-                className="text-xs font-bold text-[#1658b3] hover:text-[#0D3B66] flex items-center gap-1"
-              >
-                Explore Publishing Packages &rarr;
-              </Link>
-            </div>
-
-          </div>
         </div>
       </main>
     </div>
