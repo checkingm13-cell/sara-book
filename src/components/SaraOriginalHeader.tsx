@@ -160,8 +160,19 @@ export default function SaraOriginalHeader() {
          ───────────────────────────────────────────────────────────── */}
       <div ref={navRef} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 lg:gap-6">
         
-        {/* Left: Brand Logo + Identity */}
-        <div className="flex items-center gap-6 shrink-0">
+        {/* Left: Hamburger Toggle (Mobile Left) + Brand Logo */}
+        <div className="flex items-center gap-3 sm:gap-6 shrink-0">
+          
+          {/* Mobile Hamburger 3-Bars Toggle (Placed on the LEFT) */}
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(true)}
+            className="p-2 -ml-1 rounded-lg lg:hidden transition text-slate-900 hover:bg-black/5 cursor-pointer"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 bg-white p-1 shadow-xs">
               <Image 
@@ -174,10 +185,10 @@ export default function SaraOriginalHeader() {
               />
             </div>
             <div>
-              <span className="text-lg sm:text-xl font-black tracking-tight uppercase leading-none block font-sans text-slate-900">
+              <span className="text-base sm:text-xl font-black tracking-tight uppercase leading-none block font-sans text-slate-900">
                 SARA PUBLICATION
               </span>
-              <span className="text-[9px] font-mono tracking-wider uppercase font-bold block mt-0.5 text-slate-600">
+              <span className="text-[8px] sm:text-[9px] font-mono tracking-wider uppercase font-bold block mt-0.5 text-slate-600">
                 EST. 2011 • ACADEMIC PRESS
               </span>
             </div>
@@ -365,15 +376,6 @@ export default function SaraOriginalHeader() {
           >
             Get Started
           </Link>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            onClick={() => setDrawerOpen(true)}
-            className="p-2 rounded-md lg:hidden transition text-slate-900 hover:bg-black/5"
-            aria-label="Toggle navigation menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
 
       </div>
