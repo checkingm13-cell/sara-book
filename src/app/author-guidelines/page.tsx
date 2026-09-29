@@ -58,23 +58,23 @@ export default function AuthorGuidelinesPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
-        title="Author Guidelines & Publishing Standards"
+        title="Author Guidelines & Standards"
         subtitle="Comprehensive guidelines for submitting monographs, textbooks, edited volumes, and conference proceedings conforming to UGC API Career Advancement norms."
-        badgeText="Official Editorial Handbook & Criteria"
+        badgeText="Official Editorial Criteria"
         badgeIcon={ShieldCheck}
+        quoteHook="“Preserving scholarly rigour through double-blind peer review and international bibliographic cataloging.”"
+        indexCode="SPEC // 03"
         actionSlot={
-          <div className="flex items-center gap-3">
-            <Link
-              href="/download"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFAE00] hover:bg-[#e69d00] text-[#0A1628] text-xs font-black uppercase tracking-wider transition shadow-md"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Get Word Template</span>
-            </Link>
-          </div>
+          <Link
+            href="/download"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A1628] hover:bg-[#1658b3] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-xs"
+          >
+            <Download className="w-3.5 h-3.5 text-[#FFAE00]" />
+            <span>Word Template (.docx)</span>
+          </Link>
         }
       />
 

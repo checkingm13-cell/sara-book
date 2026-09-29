@@ -33,13 +33,15 @@ export default function BookshelfPage() {
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
-        title={`Scholarly Bookshelf (${booksData.length} Publications)`}
+        title={`Scholarly Bookshelf (${booksData.length} Titles)`}
         subtitle="Explore peer-reviewed publications across Life Sciences, Medicine, Engineering, and Social Humanities with registered 13-digit ISBNs."
-        badgeText="UGC Valid ISBN Catalog"
+        badgeText="UGC Valid Academic Catalog"
         badgeIcon={BookOpen}
+        quoteHook="“A repository of indexed research monographs, university textbooks, and scholarly anthologies.”"
+        indexCode="CAT // 05"
         actionSlot={
           <div className="w-full sm:w-80 relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -48,7 +50,7 @@ export default function BookshelfPage() {
               placeholder="Search by title, author, or ISBN..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-white/10 text-white placeholder-slate-400 border border-white/20 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#FFAE00] focus:border-transparent font-sans shadow-lg backdrop-blur-md"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 text-slate-900 placeholder-slate-400 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1658b3] focus:bg-white font-sans transition"
             />
           </div>
         }

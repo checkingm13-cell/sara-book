@@ -102,18 +102,20 @@ export default function DownloadPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
         title="Author Resource Downloads"
         subtitle="Official MS Word templates, copyright declarations, publication agreements, and UGC API reference documents ready for immediate download."
-        badgeText="Author Resource & Manuscript Downloads"
+        badgeText="Author Resources & Forms"
         badgeIcon={Download}
+        quoteHook="“Standardized manuscript frameworks and legal certificates conforming to Raja Rammohun Roy National Agency standards.”"
+        indexCode="DOCS // 04"
         actionSlot={
-          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
-            <span className="text-slate-200">Repository Status:</span>
-            <strong className="text-white font-mono">{resources.length} Verified Files</strong>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+            <span className="text-slate-600 font-medium">Repository Status:</span>
+            <strong className="text-slate-900 font-mono font-bold">{resources.length} Verified Files</strong>
           </div>
         }
       />

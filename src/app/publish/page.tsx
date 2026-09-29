@@ -27,18 +27,20 @@ export default function PublishProposalPage() {
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
-        title="Publish Your Book with UGC Valid ISBN"
+        title="Publish with UGC Valid ISBN"
         subtitle="Fill in your book proposal details below. Our editorial board in Ahmedabad reviews and responds to academic manuscripts within 48 to 72 hours."
-        badgeText="Manuscript Submission Portal"
+        badgeText="Manuscript Proposal Portal"
         badgeIcon={UploadCloud}
+        quoteHook="“Submit your monograph, dissertation, or conference proceedings for rapid double-blind peer evaluation.”"
+        indexCode="PROP // 08"
         actionSlot={
-          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-            <span className="text-slate-200">Editorial Review:</span>
-            <strong className="text-[#FFAE00] font-mono">48-72h Expedited</strong>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-slate-600 font-medium">Proposal Review:</span>
+            <strong className="text-slate-900 font-mono font-bold">48-72h Turnaround</strong>
           </div>
         }
       />

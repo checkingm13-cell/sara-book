@@ -59,18 +59,20 @@ export default function FaqPage() {
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
         title="Frequently Asked Questions"
         subtitle="Essential answers regarding manuscript submission, ISBN legal compliance, royalty terms, and delivery schedules."
-        badgeText="Author Knowledge Base"
+        badgeText="Scholarly Knowledge Base"
         badgeIcon={HelpCircle}
+        quoteHook="“Clear, comprehensive answers addressing common queries from academic researchers and first-time authors.”"
+        indexCode="FAQ // 07"
         actionSlot={
-          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-            <span className="text-slate-200">Editorial Support:</span>
-            <strong className="text-white font-mono">24h Response Rate</strong>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-slate-600 font-medium">Editorial Desk:</span>
+            <strong className="text-slate-900 font-mono font-bold">24h Response Rate</strong>
           </div>
         }
       />

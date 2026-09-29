@@ -12,18 +12,20 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
         title="Contact Editorial Division"
         subtitle="Reach out directly to our publishing board in Ahmedabad for author consultations, institutional bulk purchasing, or manuscript progress inquiries."
         badgeText="Editorial Division Headquarters"
         badgeIcon={Building2}
+        quoteHook="“Direct editorial counsel and author concierge located in Paldi, Ahmedabad.”"
+        indexCode="DIR // 06"
         actionSlot={
-          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-            <span className="text-slate-200">Office Desk:</span>
-            <strong className="text-white font-mono">Open Mon - Sat (10am - 6pm)</strong>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-slate-600 font-medium">Office Hours:</span>
+            <strong className="text-slate-900 font-mono font-bold">Mon - Sat (10am - 6pm)</strong>
           </div>
         }
       />

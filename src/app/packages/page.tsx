@@ -133,22 +133,24 @@ export default function PackagesPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
         title="Publishing Packages & Pricing"
         subtitle="All-inclusive academic book publication with authentic 13-digit ISBN allocation, professional InDesign typesetting, custom cover design, and fast guaranteed courier delivery."
         badgeText="UGC-CARE & NAAC Valid Academic Plans"
         badgeIcon={ShieldCheck}
+        quoteHook="“From peer review to doorstep delivery — complete academic publication transparently priced.”"
+        indexCode="SEC // 01"
         actionSlot={
-          <div className="bg-white/10 p-1.5 rounded-2xl border border-white/20 flex items-center shadow-lg backdrop-blur-md">
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200">
             <button
               type="button"
               onClick={() => setCurrency("INR")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currency === "INR"
-                  ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
-                  : "text-slate-300 hover:text-white"
+                  ? "bg-[#0A1628] text-white shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               ₹ INR (India)
@@ -156,10 +158,10 @@ export default function PackagesPage() {
             <button
               type="button"
               onClick={() => setCurrency("USD")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currency === "USD"
-                  ? "bg-[#FFAE00] text-[#0A1628] shadow-md"
-                  : "text-slate-300 hover:text-white"
+                  ? "bg-[#0A1628] text-white shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               $ USD (Global)

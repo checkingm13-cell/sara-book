@@ -45,18 +45,20 @@ export default function CalculatorPage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER BANNER (Architectural Swiss Blueprint)
+          1. HEADER BANNER (Swiss Style with Editorial Hook)
          ───────────────────────────────────────────────────────────── */}
       <SubpageHero
         title="Author Royalty & Print Cost Calculator"
         subtitle="Simulate your book manufacturing cost, distribution discount margins, and real author royalty earnings across India and international academic channels."
-        badgeText="Transparent Academic Printing & Royalty Engine"
+        badgeText="Transparent Academic Printing Engine"
         badgeIcon={Calculator}
+        quoteHook="“Complete fiscal transparency — calculate production costs and earnings prior to manuscript commitment.”"
+        indexCode="CALC // 02"
         actionSlot={
-          <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md flex items-center gap-3 text-xs shadow-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-slate-200">Live Formula Engine:</span>
-            <strong className="text-[#FFAE00] font-mono">100% Payout Accuracy</strong>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-slate-600 font-medium">Algorithmic Engine:</span>
+            <strong className="text-slate-900 font-mono font-bold">100% Payout Accuracy</strong>
           </div>
         }
       />
