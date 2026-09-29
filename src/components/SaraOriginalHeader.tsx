@@ -381,18 +381,18 @@ export default function SaraOriginalHeader() {
           3. MOBILE SLIDE-OVER DRAWER (Notion Press / Amazon KDP Clean Left Drawer)
          ───────────────────────────────────────────────────────────── */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-[100] lg:hidden">
           {/* Backdrop with dark blur */}
           <div 
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setDrawerOpen(false)}
           />
 
           {/* Left Slide Panel */}
-          <div className="fixed inset-y-0 left-0 w-[85vw] max-w-[320px] bg-white shadow-2xl z-50 flex flex-col justify-between animate-in slide-in-from-left duration-300">
+          <div className="fixed inset-y-0 left-0 h-full w-[80vw] max-w-[300px] bg-white shadow-2xl z-[101] flex flex-col justify-between">
             
             {/* Top Brand Card (Dark Navy #0A1628) */}
-            <div className="bg-[#0A1628] text-white p-5 border-b border-white/10 flex items-center justify-between">
+            <div className="bg-[#0A1628] text-white p-4 border-b border-white/10 flex items-center justify-between shrink-0">
               <Link 
                 href="/" 
                 onClick={() => setDrawerOpen(false)}
