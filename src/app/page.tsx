@@ -108,10 +108,9 @@ export default function SwissHomepage() {
     <div className="min-h-screen bg-white text-slate-800 font-sans">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO CAROUSEL (Full Screen Width & Full Screen Height Behind Transparent Navbar)
-          Navbar floats transparently directly on top of the slide image
+          1. HERO CAROUSEL (Lowered slightly so slides and headings are clearly visible below the header)
          ───────────────────────────────────────────────────────────── */}
-      <section className="relative w-full overflow-hidden select-none pt-0">
+      <section className="relative w-full overflow-hidden select-none pt-14 sm:pt-16 md:pt-20 bg-slate-950">
         <div className="relative w-full aspect-[16/9] max-h-[660px]">
           {heroSlides.map((slide, index) => (
             <div
@@ -127,6 +126,8 @@ export default function SwissHomepage() {
                 priority={index === 0}
                 className="object-cover object-top w-full h-full"
               />
+              {/* Subtle top vignette for contrast */}
+              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
             </div>
           ))}
 
