@@ -372,69 +372,110 @@ export default function SaraOriginalHeader() {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. MOBILE SLIDE-OVER DRAWER
+          3. MOBILE SLIDE-OVER DRAWER (Luxury Responsive Design)
          ───────────────────────────────────────────────────────────── */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop with dark blur */}
           <div 
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
             onClick={() => setDrawerOpen(false)}
           />
 
-          <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl z-50 flex flex-col">
+          {/* Drawer Slide Panel */}
+          <div className="fixed inset-y-0 right-0 w-[85vw] max-w-[340px] bg-white shadow-2xl z-50 flex flex-col justify-between animate-in slide-in-from-right duration-300">
             
-            {/* Drawer Header */}
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <Image 
-                  src="/branding/sara-logo.png" 
-                  alt="Sara Book Publication" 
-                  width={32} 
-                  height={32} 
-                  className="object-contain"
-                />
-                <span className="font-bold text-slate-900 text-sm tracking-tight uppercase">
-                  Sara Publication
-                </span>
-              </div>
-              <button 
-                onClick={() => setDrawerOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Mobile Search */}
-            <div className="p-4 border-b border-slate-100">
-              <form onSubmit={handleSearch} className="relative flex items-center">
-                <input
-                  type="text"
-                  placeholder="Search books, authors, ISBN..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-9 px-3 text-xs bg-slate-50 border border-slate-200 rounded-l-md focus:outline-none focus:border-rose-500"
-                />
-                <button
-                  type="submit"
-                  className="h-9 px-3 bg-rose-500 text-white flex items-center justify-center rounded-r-md hover:bg-rose-600"
+            {/* Top: Drawer Brand Header */}
+            <div>
+              <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg overflow-hidden bg-white p-1 border border-slate-200 shadow-2xs">
+                    <Image 
+                      src="/branding/sara-logo.png" 
+                      alt="Sara Book Publication" 
+                      width={36} 
+                      height={36} 
+                      className="object-contain w-full h-full"
+                    />
+                  </div>
+                  <div>
+                    <span className="font-black text-slate-900 text-sm tracking-tight uppercase block leading-none">
+                      Sara Publication
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block mt-1">
+                      Academic Press • Est. 2011
+                    </span>
+                  </div>
+                </div>
+                
+                <button 
+                  onClick={() => setDrawerOpen(false)}
+                  className="p-2 rounded-xl text-slate-500 hover:bg-slate-200/60 hover:text-slate-900 transition cursor-pointer"
+                  aria-label="Close menu"
                 >
-                  <Search className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
-              </form>
+              </div>
+
+              {/* Mobile Search Input */}
+              <div className="p-4 border-b border-slate-100 bg-white">
+                <form onSubmit={handleSearch} className="relative flex items-center">
+                  <input
+                    type="text"
+                    placeholder="Search by title, author, or ISBN..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full h-10 pl-3.5 pr-10 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#1658b3] focus:bg-white transition"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-1 top-1 bottom-1 px-3 bg-[#1658b3] text-white rounded-lg flex items-center justify-center transition hover:bg-blue-700 cursor-pointer"
+                    aria-label="Search"
+                  >
+                    <Search className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+              </div>
+
+              {/* Currency Selector Pill on Mobile */}
+              <div className="px-4 py-2.5 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase font-bold text-slate-500">
+                  Currency Mode:
+                </span>
+                <div className="flex items-center gap-1 bg-white p-0.5 rounded-lg border border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => setCurrency("INR")}
+                    className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition ${
+                      currency === "INR" ? "bg-[#0A1628] text-white shadow-xs" : "text-slate-600"
+                    }`}
+                  >
+                    ₹ INR
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCurrency("USD")}
+                    className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition ${
+                      currency === "USD" ? "bg-[#0A1628] text-white shadow-xs" : "text-slate-600"
+                    }`}
+                  >
+                    $ USD
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* Mobile Links with Interactive Accordion Dropdowns */}
-            <div className="flex-1 overflow-y-auto py-2 px-3 space-y-1">
+            {/* Middle: Scrollable Navigation List */}
+            <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1.5">
               
               {/* Accordion 1: Discover Books */}
-              <div className="border-b border-slate-100 pb-1">
+              <div className="rounded-xl border border-slate-100 bg-white overflow-hidden shadow-2xs">
                 <button
                   type="button"
                   onClick={() => setMobileDiscoverOpen(!mobileDiscoverOpen)}
-                  className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-slate-800 hover:bg-slate-50 transition text-sm font-bold"
+                  className="flex items-center justify-between w-full px-3.5 py-3 text-slate-800 hover:bg-slate-50 transition text-xs font-bold uppercase tracking-wide cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5">
                     <BookOpen className="w-4 h-4 text-[#1658b3]" />
                     <span>Discover Books</span>
                   </div>
@@ -442,47 +483,48 @@ export default function SaraOriginalHeader() {
                 </button>
 
                 {mobileDiscoverOpen && (
-                  <div className="pl-9 pr-2 py-1 space-y-1 bg-slate-50/60 rounded-lg mt-1 mb-1">
+                  <div className="px-3.5 pb-3 pt-1 space-y-2 bg-slate-50/60 border-t border-slate-100">
                     <Link
                       href="/bookshelf"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
+                      className="flex items-center justify-between py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
                     >
-                      Browse All Titles (100+) →
+                      <span>Browse All Titles (100+)</span>
+                      <span>→</span>
                     </Link>
                     <Link
                       href="/bookshelf?q=Medical"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Medical & Healthcare
+                      • Medical & Healthcare
                     </Link>
                     <Link
                       href="/bookshelf?q=Engineering"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Engineering & Tech
+                      • Engineering & Tech
                     </Link>
                     <Link
                       href="/bookshelf?q=Literature"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Literature & Humanities
+                      • Literature & Humanities
                     </Link>
                   </div>
                 )}
               </div>
 
               {/* Accordion 2: For Writers */}
-              <div className="border-b border-slate-100 pb-1">
+              <div className="rounded-xl border border-slate-100 bg-white overflow-hidden shadow-2xs">
                 <button
                   type="button"
                   onClick={() => setMobileWritersOpen(!mobileWritersOpen)}
-                  className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-slate-800 hover:bg-slate-50 transition text-sm font-bold"
+                  className="flex items-center justify-between w-full px-3.5 py-3 text-slate-800 hover:bg-slate-50 transition text-xs font-bold uppercase tracking-wide cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5">
                     <Package className="w-4 h-4 text-[#1658b3]" />
                     <span>For Writers</span>
                   </div>
@@ -490,86 +532,101 @@ export default function SaraOriginalHeader() {
                 </button>
 
                 {mobileWritersOpen && (
-                  <div className="pl-9 pr-2 py-1 space-y-1 bg-slate-50/60 rounded-lg mt-1 mb-1">
+                  <div className="px-3.5 pb-3 pt-1 space-y-2 bg-slate-50/60 border-t border-slate-100">
                     <Link
                       href="/packages"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
+                      className="flex items-center justify-between py-1.5 text-xs font-bold text-[#1658b3] hover:underline"
                     >
-                      Publishing Packages & Pricing
+                      <span>Publishing Packages & Pricing</span>
+                      <span>→</span>
                     </Link>
                     <Link
                       href="/author-guidelines"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Author Guidelines
+                      • Author Guidelines (UGC CAS)
                     </Link>
                     <Link
                       href="/calculator"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Royalty Calculator
+                      • Royalty & Print Calculator
                     </Link>
                     <Link
                       href="/download"
                       onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-xs text-slate-600 hover:text-slate-900"
+                      className="block py-1 text-xs text-slate-600 hover:text-slate-900"
                     >
-                      Author Downloads
+                      • Manuscript Word Downloads
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Direct Links */}
-              <Link
-                href="/faq"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition text-sm font-semibold"
-              >
-                <HelpCircle className="w-4 h-4 text-slate-400" />
-                <span>Frequently Asked Questions</span>
-              </Link>
-              <Link
-                href="/contact"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-[#1658b3] transition text-sm font-semibold"
-              >
-                <PhoneCall className="w-4 h-4 text-slate-400" />
-                <span>Contact Editorial Office</span>
-              </Link>
-
-              <div className="pt-3 pb-1 border-t border-slate-100">
+              {/* Direct Standard Links */}
+              <div className="pt-2 space-y-1">
                 <Link
-                  href="/packages"
+                  href="/calculator"
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center justify-center w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition shadow-xs"
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
                 >
-                  Get Started
+                  <Calculator className="w-4 h-4 text-slate-400" />
+                  <span>Royalty Calculator</span>
+                </Link>
+
+                <Link
+                  href="/faq"
+                  onClick={() => setDrawerOpen(false)}
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
+                >
+                  <HelpCircle className="w-4 h-4 text-slate-400" />
+                  <span>Frequently Asked Questions</span>
+                </Link>
+
+                <Link
+                  href="/contact"
+                  onClick={() => setDrawerOpen(false)}
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition text-xs font-bold"
+                >
+                  <PhoneCall className="w-4 h-4 text-slate-400" />
+                  <span>Contact Editorial Office</span>
                 </Link>
               </div>
+
             </div>
 
-            {/* Mobile Footer */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50 space-y-2">
-              <a 
-                href="https://wa.me/918866003636?text=Hello%20Sara%20Book%20Publication"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow-xs"
+            {/* Bottom: Action CTA & Fast Support */}
+            <div className="p-4 border-t border-slate-100 bg-slate-50/90 space-y-2.5">
+              <Link
+                href="/publish"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center justify-center w-full py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-sm"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Desk</span>
-              </a>
-              <a 
-                href="tel:+918866003636"
-                className="flex items-center justify-center gap-2 w-full py-2 border border-slate-200 text-slate-700 rounded-lg text-xs font-medium hover:bg-white transition"
-              >
-                <Phone className="w-3.5 h-3.5 text-slate-400" />
-                <span>+91-8866003636</span>
-              </a>
+                Submit Manuscript Proposal
+              </Link>
+
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <a 
+                  href="https://wa.me/918866003636?text=Hello%20Sara%20Book%20Publication"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-1.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[11px] font-bold transition shadow-2xs"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </a>
+                
+                <a 
+                  href="tel:+918866003636"
+                  className="flex items-center justify-center gap-1.5 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-[11px] font-bold hover:bg-slate-100 transition shadow-2xs"
+                >
+                  <Phone className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Call Us</span>
+                </a>
+              </div>
             </div>
 
           </div>
