@@ -84,8 +84,30 @@ export default function AuthorGuidelinesPage() {
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* LEFT: STICKY TABLE OF CONTENTS (4 cols) */}
-          <aside className="lg:col-span-4 sticky top-24 space-y-6">
+          {/* MOBILE QUICK NAV BAR (Visible only on < lg) */}
+          <div className="lg:hidden col-span-1 bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-xs">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-2.5">
+              JUMP TO SECTION
+            </span>
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+              {sections.map((s, idx) => (
+                <button
+                  key={s.id}
+                  onClick={() => scrollTo(s.id)}
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer ${
+                    activeSection === s.id
+                      ? "bg-[#1658b3] text-white shadow-xs"
+                      : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
+                  }`}
+                >
+                  {s.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* LEFT: DESKTOP STICKY TABLE OF CONTENTS (Hidden on mobile, sticky only on lg+) */}
+          <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 space-y-6">
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-xs">
               <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block mb-3">
                 TABLE OF CONTENTS
